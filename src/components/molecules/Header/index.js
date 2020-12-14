@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {Button} from '../../atoms';
 
 const Header = () => {
@@ -11,5 +11,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const styles = StyleSheet.create({});
