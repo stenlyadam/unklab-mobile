@@ -1,14 +1,25 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
+import {LogoUnklab, Pathway} from '../../assets';
+import {Gap} from '../../components';
 
 const Splash = () => {
   return (
-    <View>
-      <Text>Splash Screen</Text>
+    <View style={styles.container}>
+      <Image source={LogoUnklab} />
+      <Gap height={10} />
+      <Image source={Pathway} />
     </View>
   );
 };
 
 export default Splash;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#34048A',
+  },
+});
