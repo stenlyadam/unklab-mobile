@@ -3,15 +3,26 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Header} from '..';
 import {IconNullPhoto} from '../../../assets';
 
-const Profile = () => {
+const Profile = ({
+  studentName,
+  registrationNo,
+  notification,
+  arrowBack,
+  titleHeader,
+}) => {
   return (
     <View style={styles.container}>
-      <Header type="with-label" notification />
+      <Header
+        type="with-label"
+        notification={notification}
+        arrowBack={arrowBack}
+        titleHeader={titleHeader}
+      />
       <View style={styles.profileWrapper}>
         <IconNullPhoto />
         <View style={styles.profile}>
-          <Text style={styles.name}>John Doe</Text>
-          <Text style={styles.nim}>105012010001</Text>
+          <Text style={styles.name}>{studentName}</Text>
+          <Text style={styles.nim}>{registrationNo}</Text>
         </View>
       </View>
     </View>

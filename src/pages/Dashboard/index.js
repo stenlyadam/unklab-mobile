@@ -6,8 +6,14 @@ import {MenuBox, NewsCard, Profile} from '../../components/molecules';
 const Dashboard = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Profile />
+      <View style={styles.wrapper}>
+        <Profile
+          studentName="John Doe"
+          registrationNo="105012010001"
+          notification
+          arrowBack
+          titleHeader="Universitas Klabat"
+        />
         <View style={styles.menuBoxContainer}>
           <MenuBox />
         </View>
@@ -24,6 +30,7 @@ const Dashboard = () => {
             paddingVertical={4}
           />
         </View>
+
         <NewsCard />
       </View>
     </SafeAreaView>
@@ -35,7 +42,13 @@ export default Dashboard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#34048A',
+  },
+  wrapper: {
+    flex: 1,
     backgroundColor: 'white',
+    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 15,
   },
   menuBoxContainer: {
     marginTop: -60,

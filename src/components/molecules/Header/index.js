@@ -3,18 +3,18 @@ import {StyleSheet, Text, View} from 'react-native';
 import {IconArrowWhite} from '../../../assets';
 import {Button, Gap} from '../../atoms';
 
-const Header = ({type, notification, backArrow}) => {
+const Header = ({type, notification, arrowBack, titleHeader}) => {
   if (type === 'with-label') {
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
-          {backArrow && (
+          {arrowBack && (
             <>
               <IconArrowWhite />
               <Gap width={10} />
             </>
           )}
-          <Text style={styles.title}>Universitas Klabat</Text>
+          <Text style={styles.title}>{titleHeader}</Text>
         </View>
         {notification && <Button type="icon-only" icon="icon-notification" />}
       </View>

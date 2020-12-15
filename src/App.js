@@ -1,8 +1,14 @@
 import React from 'react';
-import {Dashboard, SignIn} from './pages';
+import {NavigationContainer} from '@react-navigation/native';
+import 'react-native-gesture-handler';
+import Router from './router';
 
 const App = () => {
-  return <Dashboard />;
+  return (
+    <NavigationContainer>
+      <Router />
+    </NavigationContainer>
+  );
 };
 
 export default App;

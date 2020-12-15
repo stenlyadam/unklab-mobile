@@ -3,5 +3,6 @@ import CheckBox from './CheckBox';
 import Link from './Link';
 import Button from './Button';
 import Gap from './Gap';
+import TabItem from './TabItem';
 
-export {TextInput, CheckBox, Link, Button, Gap};
+export {TextInput, CheckBox, Link, Button, Gap, TabItem};
