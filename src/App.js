@@ -1,8 +1,8 @@
 import React from 'react';
-import {Splash} from './pages';
+import {Dashboard, SignIn} from './pages';
 
 const App = () => {
-  return <Splash />;
+  return <Dashboard />;
 };
 
 export default App;

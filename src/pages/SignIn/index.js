@@ -21,7 +21,7 @@ const SignIn = () => {
           <CheckBox label="Remember me" />
           <Link label="Forgot Password?" />
         </View>
-        <Button label="Sign In Now" />
+        <Button label="Sign In Now" paddingVertical={15} />
       </View>
     </SafeAreaView>
   );

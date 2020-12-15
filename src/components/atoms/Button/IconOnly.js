@@ -1,12 +1,15 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {IconArrow} from '../../../assets';
+import {IconArrow, IconNotification} from '../../../assets';
 
 const IconOnly = ({icon, onPress}) => {
   const Icon = () => {
     if (icon === 'icon-arrow') {
       return <IconArrow />;
+    } else if (icon === 'icon-notification') {
+      return <IconNotification />;
     }
+
     return <IconArrow />;
   };
 
