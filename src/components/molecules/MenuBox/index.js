@@ -2,10 +2,15 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from '../../atoms';
 
-const MenuBox = () => {
+const MenuBox = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Button type="icon-with-label" icon="icon-id-card" label="ID Card" />
+      <Button
+        type="icon-with-label"
+        icon="icon-id-card"
+        label="ID Card"
+        onPress={() => navigation.navigate('StudentCard')}
+      />
       <Button type="icon-with-label" icon="icon-schedule" label="Schedule" />
       <Button
         type="icon-with-label"

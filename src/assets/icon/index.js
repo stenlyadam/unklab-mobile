@@ -13,6 +13,11 @@ import IconProfileActive from './ic-profile-active.svg';
 import IconProfile from './ic-profile.svg';
 import IconSchedule from './ic-schedule.svg';
 import IconAccountBalance from './ic-account-balance.svg';
+import IconInfo from './ic-info.svg';
+import IconBadgeLevel1 from './ic-badge1.svg';
+import IconBadgeLevel2 from './ic-badge2.svg';
+import IconBadgeLevel3 from './ic-badge3.svg';
+import IconBadgeLevel4 from './ic-badge4.svg';
 
 export {
   IconArrow,
@@ -30,4 +35,9 @@ export {
   IconProfile,
   IconSchedule,
   IconAccountBalance,
+  IconInfo,
+  IconBadgeLevel1,
+  IconBadgeLevel2,
+  IconBadgeLevel3,
+  IconBadgeLevel4,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Dashboard, Profile, SignIn} from '../pages';
+import {Dashboard, Profile, SignIn, StudentCard} from '../pages';
 import {BottomTabNavigator} from '../components';
 
 const Stack = createStackNavigator();
@@ -27,6 +27,11 @@ const Router = () => {
       <Stack.Screen
         name="MainApp"
         component={MainApp}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="StudentCard"
+        component={StudentCard}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

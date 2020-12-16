@@ -1,16 +1,19 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {IconArrowWhite} from '../../../assets';
 import {Button, Gap} from '../../atoms';
 
-const Header = ({type, notification, arrowBack, titleHeader}) => {
+const Header = ({type, notification, arrowBack, titleHeader, onPress}) => {
   if (type === 'with-label') {
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
           {arrowBack && (
             <>
-              <IconArrowWhite />
+              <Button
+                type="icon-only"
+                icon="icon-arrow-white"
+                onPress={onPress}
+              />
               <Gap width={10} />
             </>
           )}
@@ -22,7 +25,7 @@ const Header = ({type, notification, arrowBack, titleHeader}) => {
   }
   return (
     <View>
-      <Button type="icon-only" icon="icon-arrow" />
+      <Button type="icon-only" icon="icon-arrow" onPress={onPress} />
     </View>
   );
 };

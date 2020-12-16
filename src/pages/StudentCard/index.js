@@ -1,44 +1,30 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {Button, Gap} from '../../components/atoms';
-import {MenuBox, NewsCard, Profile} from '../../components/molecules';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {Gap} from '../../components/atoms';
+import {Card, PointBox, Profile} from '../../components/molecules';
 
-const Dashboard = ({navigation}) => {
+const StudentCard = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
         <Profile
           studentName="John Doe"
           registrationNo="105012010001"
-          notification
           arrowBack
-          titleHeader="Universitas Klabat"
+          titleHeader="Student ID Card"
+          navigation={navigation}
         />
         <View style={styles.menuBoxContainer}>
-          <MenuBox navigation={navigation} />
+          <PointBox />
+          <Gap height={15} />
+          <Card />
         </View>
-        <Gap height={20} />
-        <View style={styles.newsHeaderWrapper}>
-          <View style={styles.newsHeader}>
-            <Text style={styles.whatsNewsLabel}>What’s New</Text>
-            <Text style={styles.latestNewsLabel}>Latest news from UNKLAB!</Text>
-          </View>
-          <Button
-            label="All News"
-            width={100}
-            height={30}
-            paddingVertical={4}
-            onPress={() => navigation.navigate('StudentCard')}
-          />
-        </View>
-
-        <NewsCard />
       </View>
     </SafeAreaView>
   );
 };
 
-export default Dashboard;
+export default StudentCard;
 
 const styles = StyleSheet.create({
   container: {

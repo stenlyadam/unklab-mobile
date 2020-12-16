@@ -1,6 +1,11 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
-import {IconArrow, IconNotification} from '../../../assets';
+import {
+  IconArrow,
+  IconArrowWhite,
+  IconInfo,
+  IconNotification,
+} from '../../../assets';
 
 const IconOnly = ({icon, onPress}) => {
   const Icon = () => {
@@ -8,8 +13,11 @@ const IconOnly = ({icon, onPress}) => {
       return <IconArrow />;
     } else if (icon === 'icon-notification') {
       return <IconNotification />;
+    } else if (icon === 'icon-arrow-white') {
+      return <IconArrowWhite />;
+    } else if (icon === 'icon-info') {
+      return <IconInfo />;
     }
-
     return <IconArrow />;
   };
 

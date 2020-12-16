@@ -9,6 +9,7 @@ const Profile = ({
   notification,
   arrowBack,
   titleHeader,
+  navigation,
 }) => {
   return (
     <View style={styles.container}>
@@ -17,6 +18,7 @@ const Profile = ({
         notification={notification}
         arrowBack={arrowBack}
         titleHeader={titleHeader}
+        onPress={() => navigation.goBack()}
       />
       <View style={styles.profileWrapper}>
         <IconNullPhoto />
