@@ -9,7 +9,8 @@ const Dashboard = ({navigation}) => {
       <View style={styles.wrapper}>
         <Profile
           studentName="John Doe"
-          registrationNo="105012010001"
+          registrationNo="S2010001"
+          nim="105012010001"
           notification
           arrowBack
           titleHeader="Universitas Klabat"

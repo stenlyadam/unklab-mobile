@@ -11,12 +11,14 @@ import {
 
 const Profile = ({
   studentName,
+  nim,
   registrationNo,
   notification,
   arrowBack,
   titleHeader,
   navigation,
   badge,
+  type2,
 }) => {
   const Badge = () => {
     if (badge === 'level-1') {
@@ -35,7 +37,7 @@ const Profile = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container(type2)}>
       <Header
         type="with-label"
         notification={notification}
@@ -43,11 +45,17 @@ const Profile = ({
         titleHeader={titleHeader}
         onPress={() => navigation.goBack()}
       />
+      {type2 && (
+        <>
+          <Text style={styles.fakultas}>Fakultas Ilmu Komputer</Text>
+          <Text style={styles.prodi}>Sistem Informasi</Text>
+        </>
+      )}
       <View style={styles.profileWrapper}>
         <IconNullPhoto />
         <View style={styles.profile}>
           <Text style={styles.name}>{studentName}</Text>
-          <Text style={styles.nim}>{registrationNo}</Text>
+          <Text style={styles.nim}>{`${nim} / ${registrationNo}`}</Text>
         </View>
         <View style={styles.badgeWrapper}>{badge && <Badge />}</View>
       </View>
@@ -58,11 +66,13 @@ const Profile = ({
 export default Profile;
 
 const styles = StyleSheet.create({
-  container: {
+  container: (type2) => ({
     backgroundColor: '#34048A',
-    height: 225,
-    borderBottomRightRadius: 30,
-  },
+    height: type2 ? 200 : 225,
+    borderBottomRightRadius: type2 ? 10 : 30,
+    borderBottomLeftRadius: type2 ? 10 : 0,
+    paddingRight: 20,
+  }),
   profileWrapper: {
     flexDirection: 'row',
     marginVertical: 14,
@@ -84,5 +94,17 @@ const styles = StyleSheet.create({
   badgeWrapper: {
     flex: 1,
     alignItems: 'flex-end',
+  },
+  fakultas: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'right',
+  },
+  prodi: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'right',
   },
 });
