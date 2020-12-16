@@ -1,7 +1,13 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Header} from '..';
-import {IconNullPhoto} from '../../../assets';
+import {
+  IconBadgeLevel1,
+  IconBadgeLevel2,
+  IconBadgeLevel3,
+  IconBadgeLevel4,
+  IconNullPhoto,
+} from '../../../assets';
 
 const Profile = ({
   studentName,
@@ -10,7 +16,24 @@ const Profile = ({
   arrowBack,
   titleHeader,
   navigation,
+  badge,
 }) => {
+  const Badge = () => {
+    if (badge === 'level-1') {
+      return <IconBadgeLevel1 />;
+    }
+    if (badge === 'level-2') {
+      return <IconBadgeLevel2 />;
+    }
+    if (badge === 'level-3') {
+      return <IconBadgeLevel3 />;
+    }
+    if (badge === 'level-4') {
+      return <IconBadgeLevel4 />;
+    }
+    return <IconBadgeLevel1 />;
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -26,6 +49,7 @@ const Profile = ({
           <Text style={styles.name}>{studentName}</Text>
           <Text style={styles.nim}>{registrationNo}</Text>
         </View>
+        <View style={styles.badgeWrapper}>{badge && <Badge />}</View>
       </View>
     </View>
   );
@@ -56,5 +80,9 @@ const styles = StyleSheet.create({
   nim: {
     fontSize: 14,
     color: 'white',
+  },
+  badgeWrapper: {
+    flex: 1,
+    alignItems: 'flex-end',
   },
 });

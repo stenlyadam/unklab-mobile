@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Gap} from '../../components/atoms';
-import {Card, PointBox, Profile} from '../../components/molecules';
+import {BadgeBox, Card, PointBox, Profile} from '../../components/molecules';
 
 const StudentCard = ({navigation}) => {
   return (
@@ -13,11 +13,14 @@ const StudentCard = ({navigation}) => {
           arrowBack
           titleHeader="Student ID Card"
           navigation={navigation}
+          badge="level-1"
         />
         <View style={styles.menuBoxContainer}>
           <PointBox />
           <Gap height={15} />
           <Card />
+          <Gap height={30} />
+          <BadgeBox />
         </View>
       </View>
     </SafeAreaView>
