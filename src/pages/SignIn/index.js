@@ -1,12 +1,11 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {Button, CheckBox, Gap, Header, Link, TextInput} from '../../components';
+import {Button, CheckBox, Gap, Link, TextInput} from '../../components';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
-        <Header />
         <Gap height={14} />
         <Text style={styles.welcome}>Welcome, please sign in!</Text>
         <Text style={styles.description}>
@@ -21,7 +20,11 @@ const SignIn = () => {
           <CheckBox label="Remember me" />
           <Link label="Forgot Password?" />
         </View>
-        <Button label="Sign In Now" paddingVertical={15} />
+        <Button
+          label="Sign In Now"
+          paddingVertical={15}
+          onPress={() => navigation.replace('MainApp')}
+        />
       </View>
     </SafeAreaView>
   );

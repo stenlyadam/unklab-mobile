@@ -12,7 +12,6 @@ const Dashboard = ({navigation}) => {
           registrationNo="S2010001"
           nim="105012010001"
           notification
-          arrowBack
           titleHeader="Universitas Klabat"
         />
         <View style={styles.menuBoxContainer}>
