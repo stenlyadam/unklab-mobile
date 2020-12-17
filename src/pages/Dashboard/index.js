@@ -28,7 +28,6 @@ const Dashboard = ({navigation}) => {
             width={100}
             height={30}
             paddingVertical={4}
-            onPress={() => navigation.navigate('StudentCard')}
           />
         </View>
 
