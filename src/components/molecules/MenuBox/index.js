@@ -11,7 +11,12 @@ const MenuBox = ({navigation}) => {
         label="ID Card"
         onPress={() => navigation.navigate('StudentCard')}
       />
-      <Button type="icon-with-label" icon="icon-schedule" label="Schedule" />
+      <Button
+        type="icon-with-label"
+        icon="icon-schedule"
+        label="Schedule"
+        onPress={() => navigation.navigate('Schedule')}
+      />
       <Button
         type="icon-with-label"
         icon="icon-achievement"

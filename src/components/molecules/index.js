@@ -6,6 +6,8 @@ import BottomTabNavigator from './BottomTabNavigator';
 import PointBox from './PointBox';
 import Card from './Card';
 import BadgeBox from './BadgeBox';
+import DaysBox from './DaysBox';
+import ScheduleBox from './ScheduleBox';
 
 export {
   Header,
@@ -16,4 +18,6 @@ export {
   PointBox,
   Card,
   BadgeBox,
+  DaysBox,
+  ScheduleBox,
 };

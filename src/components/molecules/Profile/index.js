@@ -14,11 +14,13 @@ const Profile = ({
   nim,
   registrationNo,
   notification,
+  search,
   arrowBack,
   titleHeader,
   navigation,
   badge,
   type2,
+  type3,
 }) => {
   const Badge = () => {
     if (badge === 'level-1') {
@@ -35,6 +37,20 @@ const Profile = ({
     }
     return <IconBadgeLevel1 />;
   };
+
+  if (type3) {
+    return (
+      <View style={styles.containerType3}>
+        <Header
+          type="with-label"
+          arrowBack={arrowBack}
+          search={search}
+          titleHeader={titleHeader}
+          onPress={() => navigation.goBack()}
+        />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container(type2)}>
@@ -73,6 +89,9 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: type2 ? 10 : 0,
     paddingRight: 20,
   }),
+  containerType3: {
+    backgroundColor: '#34048A',
+  },
   profileWrapper: {
     flexDirection: 'row',
     marginVertical: 14,

@@ -18,6 +18,7 @@ import IconBadgeLevel1 from './ic-badge1.svg';
 import IconBadgeLevel2 from './ic-badge2.svg';
 import IconBadgeLevel3 from './ic-badge3.svg';
 import IconBadgeLevel4 from './ic-badge4.svg';
+import IconSearch from './ic-search';
 
 export {
   IconArrow,
@@ -40,4 +41,5 @@ export {
   IconBadgeLevel2,
   IconBadgeLevel3,
   IconBadgeLevel4,
+  IconSearch,
 };

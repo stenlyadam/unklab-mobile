@@ -5,6 +5,7 @@ import {
   IconArrowWhite,
   IconInfo,
   IconNotification,
+  IconSearch,
 } from '../../../assets';
 
 const IconOnly = ({icon, onPress}) => {
@@ -17,6 +18,8 @@ const IconOnly = ({icon, onPress}) => {
       return <IconArrowWhite />;
     } else if (icon === 'icon-info') {
       return <IconInfo />;
+    } else if (icon === 'icon-search') {
+      return <IconSearch />;
     }
     return <IconArrow />;
   };

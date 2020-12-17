@@ -5,5 +5,15 @@ import Button from './Button';
 import Gap from './Gap';
 import TabItem from './TabItem';
 import DataItem from './DataItem';
+import ScheduleItem from './ScheduleItem';
 
-export {TextInput, CheckBox, Link, Button, Gap, TabItem, DataItem};
+export {
+  TextInput,
+  CheckBox,
+  Link,
+  Button,
+  Gap,
+  TabItem,
+  DataItem,
+  ScheduleItem,
+};

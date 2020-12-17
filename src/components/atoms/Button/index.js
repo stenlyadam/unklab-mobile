@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import IconOnly from './IconOnly';
 import IconWithLabel from './IconWithLabel';
+import Rounded from './Rounded';
 
 const Button = ({
   label,
@@ -17,6 +18,9 @@ const Button = ({
   }
   if (type === 'icon-with-label') {
     return <IconWithLabel icon={icon} onPress={onPress} label={label} />;
+  }
+  if (type === 'rounded') {
+    return <Rounded onPress={onPress} label={label} />;
   }
 
   return (

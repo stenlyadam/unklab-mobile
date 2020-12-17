@@ -2,7 +2,14 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button, Gap} from '../../atoms';
 
-const Header = ({type, notification, arrowBack, titleHeader, onPress}) => {
+const Header = ({
+  type,
+  notification,
+  arrowBack,
+  titleHeader,
+  onPress,
+  search,
+}) => {
   if (type === 'with-label') {
     return (
       <View style={styles.container}>
@@ -20,6 +27,7 @@ const Header = ({type, notification, arrowBack, titleHeader, onPress}) => {
           <Text style={styles.title}>{titleHeader}</Text>
         </View>
         {notification && <Button type="icon-only" icon="icon-notification" />}
+        {search && <Button type="icon-only" icon="icon-search" />}
       </View>
     );
   }
