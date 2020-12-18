@@ -39,7 +39,7 @@ export default IconWithLabel;
 
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
+    margin: 10,
     height: 60,
     width: 100,
     justifyContent: 'space-between',

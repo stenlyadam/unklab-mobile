@@ -19,6 +19,11 @@ const MenuBox = ({navigation}) => {
       />
       <Button
         type="icon-with-label"
+        icon="icon-account"
+        label="Account Balance"
+      />
+      <Button
+        type="icon-with-label"
         icon="icon-achievement"
         label="Achievement"
       />
@@ -32,11 +37,6 @@ const MenuBox = ({navigation}) => {
         icon="icon-pre-registration"
         label="Pre Registration"
       />
-      <Button
-        type="icon-with-label"
-        icon="icon-account"
-        label="Account Balance"
-      />
     </View>
   );
 };
@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     width: 370,
     height: 197,
-
     borderRadius: 10,
     backgroundColor: 'white',
     flexDirection: 'row',
