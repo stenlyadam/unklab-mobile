@@ -8,6 +8,7 @@ import Card from './Card';
 import BadgeBox from './BadgeBox';
 import DaysBox from './DaysBox';
 import ScheduleBox from './ScheduleBox';
+import SaldoBox from './SaldoBox';
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   BadgeBox,
   DaysBox,
   ScheduleBox,
+  SaldoBox,
 };

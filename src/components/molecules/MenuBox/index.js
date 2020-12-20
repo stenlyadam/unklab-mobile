@@ -21,6 +21,7 @@ const MenuBox = ({navigation}) => {
         type="icon-with-label"
         icon="icon-account"
         label="Account Balance"
+        onPress={() => navigation.navigate('AccountBalance')}
       />
       <Button
         type="icon-with-label"

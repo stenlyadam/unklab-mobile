@@ -19,6 +19,13 @@ import IconBadgeLevel2 from './ic-badge2.svg';
 import IconBadgeLevel3 from './ic-badge3.svg';
 import IconBadgeLevel4 from './ic-badge4.svg';
 import IconSearch from './ic-search';
+import IconDownload from './ic-download';
+import IconRupiah from './ic-rupiah';
+import IconPay from './ic-pay';
+import IconCalendar from './ic-calendar';
+import IconRegistration from './ic-registration.svg';
+import IconWireless from './ic-wireless.svg';
+import IconMoney from './ic-money';
 
 export {
   IconArrow,
@@ -42,4 +49,11 @@ export {
   IconBadgeLevel3,
   IconBadgeLevel4,
   IconSearch,
+  IconDownload,
+  IconRupiah,
+  IconPay,
+  IconCalendar,
+  IconRegistration,
+  IconWireless,
+  IconMoney,
 };

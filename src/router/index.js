@@ -8,6 +8,7 @@ import {
   SignIn,
   StudentCard,
   Schedule,
+  AccountBalance,
 } from '../pages';
 import {BottomTabNavigator} from '../components';
 
@@ -25,7 +26,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainApp">
+    <Stack.Navigator initialRouteName="AccountBalance">
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -49,6 +50,11 @@ const Router = () => {
       <Stack.Screen
         name="Schedule"
         component={Schedule}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="AccountBalance"
+        component={AccountBalance}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

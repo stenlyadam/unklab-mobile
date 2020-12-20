@@ -6,6 +6,7 @@ import Gap from './Gap';
 import TabItem from './TabItem';
 import DataItem from './DataItem';
 import ScheduleItem from './ScheduleItem';
+import TransactionItem from './TransactionItem';
 
 export {
   TextInput,
@@ -16,4 +17,5 @@ export {
   TabItem,
   DataItem,
   ScheduleItem,
+  TransactionItem,
 };

@@ -9,6 +9,7 @@ const Header = ({
   titleHeader,
   onPress,
   search,
+  download,
 }) => {
   if (type === 'with-label') {
     return (
@@ -28,6 +29,7 @@ const Header = ({
         </View>
         {notification && <Button type="icon-only" icon="icon-notification" />}
         {search && <Button type="icon-only" icon="icon-search" />}
+        {download && <Button type="icon-only" icon="icon-download" />}
       </View>
     );
   }

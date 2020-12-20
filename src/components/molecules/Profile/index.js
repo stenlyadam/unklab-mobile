@@ -20,7 +20,8 @@ const Profile = ({
   navigation,
   badge,
   type2,
-  type3,
+  headerOnly,
+  download,
 }) => {
   const Badge = () => {
     if (badge === 'level-1') {
@@ -38,13 +39,14 @@ const Profile = ({
     return <IconBadgeLevel1 />;
   };
 
-  if (type3) {
+  if (headerOnly) {
     return (
       <View style={styles.containerType3}>
         <Header
           type="with-label"
           arrowBack={arrowBack}
           search={search}
+          download={download}
           titleHeader={titleHeader}
           onPress={() => navigation.goBack()}
         />
