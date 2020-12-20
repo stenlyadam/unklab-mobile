@@ -6,11 +6,11 @@ const Schedule = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Profile
+        titleHeader="Student Schedule"
         arrowBack
-        titleHeader="Class Schedule"
         navigation={navigation}
         search={true}
-        type3
+        headerOnly
       />
 
       <View style={styles.boxWrapper}>
