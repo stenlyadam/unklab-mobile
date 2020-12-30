@@ -13,6 +13,8 @@ const Profile = ({
   studentName,
   nim,
   registrationNo,
+  faculty,
+  prodi,
   notification,
   search,
   arrowBack,
@@ -65,8 +67,8 @@ const Profile = ({
       />
       {type2 && (
         <>
-          <Text style={styles.fakultas}>Fakultas Ilmu Komputer</Text>
-          <Text style={styles.prodi}>Sistem Informasi</Text>
+          <Text style={styles.fakultas}>{faculty}</Text>
+          <Text style={styles.prodi}>{prodi}</Text>
         </>
       )}
       <View style={styles.profileWrapper}>

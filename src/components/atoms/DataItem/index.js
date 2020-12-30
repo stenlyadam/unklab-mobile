@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    fontWeight: '200',
+    fontWeight: '700',
   },
   description: {
     textAlign: 'right',

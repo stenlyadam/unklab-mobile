@@ -8,7 +8,7 @@ import {
 } from '../../../assets';
 import {Gap} from '../../atoms';
 
-const Card = () => {
+const Card = ({regNumber, nim, fullName, faculty, prodi, validThru}) => {
   const [showFrontCard, setShowFrontCard] = useState(true);
 
   if (showFrontCard) {
@@ -18,31 +18,29 @@ const Card = () => {
           <Image source={LogoUnklab} style={styles.logo} />
           <View style={styles.header}>
             <Text style={styles.unklab}>Universitas Klabat</Text>
-            <Text style={styles.fakultas}>
-              Akademi Sekretari Manajemen Indonesia Klabat
-            </Text>
+            <Text style={styles.fakultas}>{faculty}</Text>
           </View>
         </View>
         <Gap height={5} />
         <View style={styles.profileWrapper}>
           <View style={styles.profile}>
             <Text style={styles.nimTitle}>NIM</Text>
-            <Text style={styles.nim}>105012010001</Text>
+            <Text style={styles.nim}>{nim}</Text>
             <Gap height={15} />
             <Text style={styles.regNumberTitle}>REG. NUMBER</Text>
-            <Text style={styles.regNumber}>S2010001</Text>
+            <Text style={styles.regNumber}>{regNumber}</Text>
           </View>
           <IconNullPhoto />
         </View>
         <Gap height={5} />
         <View style={styles.validThruWrapper}>
-          <Text style={styles.prodi}>SISTEM INFORMASI</Text>
+          <Text style={styles.prodi}>{prodi}</Text>
           <View>
             <Text style={styles.validThru}>VALID THRU</Text>
-            <Text style={styles.date}>08/21</Text>
+            <Text style={styles.date}>{validThru}</Text>
           </View>
         </View>
-        <Text style={styles.name}>John Doe</Text>
+        <Text style={styles.name}>{fullName}</Text>
 
         <TouchableOpacity
           style={styles.tap}

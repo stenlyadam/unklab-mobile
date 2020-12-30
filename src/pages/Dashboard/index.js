@@ -1,16 +1,33 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap} from '../../components/atoms';
 import {MenuBox, NewsCard, Profile} from '../../components/molecules';
+import {getData} from '../../utils';
 
 const Dashboard = ({navigation}) => {
+  const [studentProfile, setStudentProfile] = useState({
+    regNumber: '',
+    nim: '',
+    fullName: '',
+  });
+
+  useEffect(() => {
+    getData('user').then((res) => {
+      setStudentProfile({
+        regNumber: res.regNumber,
+        nim: res.nim,
+        fullName: res.fullName,
+      });
+    });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
         <Profile
-          studentName="John Doe"
-          registrationNo="S2010001"
-          nim="105012010001"
+          studentName={studentProfile.fullName}
+          registrationNo={studentProfile.regNumber}
+          nim={studentProfile.nim}
           notification
           titleHeader="Universitas Klabat"
         />
