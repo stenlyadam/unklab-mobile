@@ -1,13 +1,12 @@
+import axios from 'axios';
+import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {DataItem} from '../../components/atoms';
 import {Profile as HeaderProfile} from '../../components/molecules';
-import axios from 'axios';
 import {getData} from '../../utils';
-import moment from 'moment';
 
 const Profile = ({navigation}) => {
-  const [token, setToken] = useState('');
   const [studentProfile, setStudentProfile] = useState({
     regNumber: '',
     nim: '',
@@ -17,38 +16,38 @@ const Profile = ({navigation}) => {
     pob: '',
     phoneNumber: '',
     address: '',
+    fatherName: '',
   });
 
   useEffect(() => {
     const url = 'http://bni.unklab.ac.id:3000/api/profile/';
 
-    getData('user').then((res) => {
-      setToken(res.token);
-    });
-
-    axios
-      .get(url, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      })
-      .then((res) => {
-        const data = res.data.data[0];
-        setStudentProfile({
-          regNumber: data.REGISTRATION_NUMBER,
-          nim: data.NIM,
-          fullName: data.NAMA_SESUAI_IJAZAH,
-          faculty: data.FACULTY_NAME,
-          prodi: data.PRODY_NAME,
-          gender: data.GENDER === 'F' ? 'Female' : 'Male',
-          dob: moment(data.DOB).format('L'),
-          pob: data.POB,
-          phoneNumber: data.HANDPHONE,
-          address: data.ADDRESS,
+    getData('user').then((resStorage) => {
+      axios
+        .get(url, {
+          headers: {
+            Authorization: 'Bearer ' + resStorage.token,
+          },
+        })
+        .then((res) => {
+          const data = res.data.data[0];
+          console.log('respons,', res);
+          setStudentProfile({
+            regNumber: data.REGISTRATION_NUMBER,
+            nim: data.NIM,
+            fullName: data.NAMA_SESUAI_IJAZAH,
+            faculty: data.FACULTY_NAME,
+            prodi: data.PRODY_NAME,
+            gender: data.GENDER === 'F' ? 'Female' : 'Male',
+            dob: moment(data.DOB).format('L'),
+            pob: data.POB,
+            phoneNumber: data.HANDPHONE,
+            address: data.ADDRESS,
+            fatherName: data.father_name,
+          });
         });
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    }, []);
+  });
 
   const {
     regNumber,
@@ -61,6 +60,7 @@ const Profile = ({navigation}) => {
     pob,
     phoneNumber,
     address,
+    fatherName,
   } = studentProfile;
 
   return (
@@ -85,10 +85,11 @@ const Profile = ({navigation}) => {
           <DataItem label="Gender" description={gender} />
           <DataItem label="Date of Birth" description={`${pob}, ${dob}`} />
           <DataItem label="Phone No" description={phoneNumber} />
-          {/* <DataItem
+          <DataItem
             label="Parent / Guardian Full Name"
-            description="Vivi Sumanti Tuuk"
+            description={fatherName}
           />
+          {/*
           <DataItem
             label="Parent / Guardian Phone No"
             description="08114381718"

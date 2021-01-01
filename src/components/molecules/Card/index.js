@@ -1,14 +1,9 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {
-  DummyQrCode,
-  DummySignature,
-  IconNullPhoto,
-  LogoUnklab,
-} from '../../../assets';
+import {DummyQrCode, DummySignature, LogoUnklab} from '../../../assets';
 import {Gap} from '../../atoms';
 
-const Card = ({regNumber, nim, fullName, faculty, prodi, validThru}) => {
+const Card = ({regNumber, nim, fullName, faculty, prodi, validThru, photo}) => {
   const [showFrontCard, setShowFrontCard] = useState(true);
 
   if (showFrontCard) {
@@ -30,7 +25,10 @@ const Card = ({regNumber, nim, fullName, faculty, prodi, validThru}) => {
             <Text style={styles.regNumberTitle}>REG. NUMBER</Text>
             <Text style={styles.regNumber}>{regNumber}</Text>
           </View>
-          <IconNullPhoto />
+          <Image
+            source={{uri: photo}}
+            style={{width: 100, height: 100, borderRadius: 100 / 2}}
+          />
         </View>
         <Gap height={5} />
         <View style={styles.validThruWrapper}>
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     width: 370,
-    height: 250,
+    height: 280,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -171,7 +169,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   name: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: '400',
     color: 'white',
     maxWidth: 230,
@@ -189,7 +187,7 @@ const styles = StyleSheet.create({
   },
   tap: {
     position: 'absolute',
-    top: 230,
+    top: 260,
     width: 241,
     height: 30,
     backgroundColor: '#341948',

@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap} from '../../components/atoms';
 import {MenuBox, NewsCard, Profile} from '../../components/molecules';
@@ -9,15 +10,27 @@ const Dashboard = ({navigation}) => {
     regNumber: '',
     nim: '',
     fullName: '',
+    photo: '',
   });
 
   useEffect(() => {
+    const url = 'http://bni.unklab.ac.id:3000/api/profile/';
     getData('user').then((res) => {
-      setStudentProfile({
-        regNumber: res.regNumber,
-        nim: res.nim,
-        fullName: res.fullName,
-      });
+      axios
+        .get(url, {
+          headers: {
+            Authorization: 'Bearer ' + res.token,
+          },
+        })
+        .then((resProfile) => {
+          const image = `data:image/jpeg;base64, ${resProfile.data.imageBase64}`;
+          setStudentProfile({
+            regNumber: res.regNumber,
+            nim: res.nim,
+            fullName: res.fullName,
+            photo: image,
+          });
+        });
     });
   }, []);
 
@@ -30,6 +43,7 @@ const Dashboard = ({navigation}) => {
           nim={studentProfile.nim}
           notification
           titleHeader="Universitas Klabat"
+          photo={studentProfile.photo}
         />
         <View style={styles.menuBoxContainer}>
           <MenuBox navigation={navigation} />
@@ -68,7 +82,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
   },
   menuBoxContainer: {
-    marginTop: -60,
+    marginTop: -80,
     alignItems: 'center',
   },
   newsHeaderWrapper: {

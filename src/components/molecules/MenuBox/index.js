@@ -23,7 +23,7 @@ const MenuBox = ({navigation}) => {
         label="Account Balance"
         onPress={() => navigation.navigate('AccountBalance')}
       />
-      <Button
+      {/* <Button
         type="icon-with-label"
         icon="icon-achievement"
         label="Achievement"
@@ -37,7 +37,7 @@ const MenuBox = ({navigation}) => {
         type="icon-with-label"
         icon="icon-pre-registration"
         label="Pre Registration"
-      />
+      /> */}
     </View>
   );
 };
@@ -48,10 +48,11 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
     width: 370,
-    height: 197,
+    // height: 197,
+    height: 150,
     borderRadius: 10,
     backgroundColor: 'white',
-    flexDirection: 'row',
+    // flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',

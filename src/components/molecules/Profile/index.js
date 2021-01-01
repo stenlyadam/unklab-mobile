@@ -1,13 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {Header} from '..';
-import {
-  IconBadgeLevel1,
-  IconBadgeLevel2,
-  IconBadgeLevel3,
-  IconBadgeLevel4,
-  IconNullPhoto,
-} from '../../../assets';
+// import {
+//   IconBadgeLevel1,
+//   IconBadgeLevel2,
+//   IconBadgeLevel3,
+//   IconBadgeLevel4,
+// } from '../../../assets';
 
 const Profile = ({
   studentName,
@@ -15,6 +14,7 @@ const Profile = ({
   registrationNo,
   faculty,
   prodi,
+  photo,
   notification,
   search,
   arrowBack,
@@ -25,21 +25,21 @@ const Profile = ({
   headerOnly,
   download,
 }) => {
-  const Badge = () => {
-    if (badge === 'level-1') {
-      return <IconBadgeLevel1 />;
-    }
-    if (badge === 'level-2') {
-      return <IconBadgeLevel2 />;
-    }
-    if (badge === 'level-3') {
-      return <IconBadgeLevel3 />;
-    }
-    if (badge === 'level-4') {
-      return <IconBadgeLevel4 />;
-    }
-    return <IconBadgeLevel1 />;
-  };
+  // const Badge = () => {
+  //   if (badge === 'level-1') {
+  //     return <IconBadgeLevel1 />;
+  //   }
+  //   if (badge === 'level-2') {
+  //     return <IconBadgeLevel2 />;
+  //   }
+  //   if (badge === 'level-3') {
+  //     return <IconBadgeLevel3 />;
+  //   }
+  //   if (badge === 'level-4') {
+  //     return <IconBadgeLevel4 />;
+  //   }
+  //   return <IconBadgeLevel1 />;
+  // };
 
   if (headerOnly) {
     return (
@@ -71,13 +71,21 @@ const Profile = ({
           <Text style={styles.prodi}>{prodi}</Text>
         </>
       )}
+
       <View style={styles.profileWrapper}>
-        <IconNullPhoto />
+        <View style={styles.photoContainer}>
+          <Image
+            style={styles.photo}
+            source={{
+              uri: photo,
+            }}
+            resizeMode="contain"
+          />
+        </View>
         <View style={styles.profile}>
           <Text style={styles.name}>{studentName}</Text>
           <Text style={styles.nim}>{`${nim} / ${registrationNo}`}</Text>
         </View>
-        <View style={styles.badgeWrapper}>{badge && <Badge />}</View>
       </View>
     </View>
   );
@@ -88,7 +96,7 @@ export default Profile;
 const styles = StyleSheet.create({
   container: (type2) => ({
     backgroundColor: '#34048A',
-    height: type2 ? 200 : 225,
+    height: type2 ? 200 : 300,
     borderBottomRightRadius: type2 ? 10 : 30,
     borderBottomLeftRadius: type2 ? 10 : 0,
     paddingRight: 20,
@@ -100,10 +108,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 14,
     marginHorizontal: 18,
+    height: 150,
   },
   profile: {
-    marginLeft: 10,
+    flex: 1,
     justifyContent: 'center',
+  },
+  photoContainer: {
+    justifyContent: 'center',
+  },
+  photo: {
+    width: 130,
+    height: 130,
+    borderRadius: 10,
   },
   name: {
     fontSize: 18,

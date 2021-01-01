@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Gap} from '../../components/atoms';
-import {BadgeBox, Card, PointBox, Profile} from '../../components/molecules';
+import {Card, PointBox, Profile} from '../../components/molecules';
 import {getData} from '../../utils';
 
 const StudentCard = ({navigation}) => {
@@ -11,21 +12,33 @@ const StudentCard = ({navigation}) => {
     fullName: '',
     faculty: '',
     prodi: '',
+    photo: '',
   });
 
   useEffect(() => {
+    const url = 'http://bni.unklab.ac.id:3000/api/profile/';
     getData('user').then((res) => {
-      setStudentProfile({
-        regNumber: res.regNumber,
-        nim: res.nim,
-        fullName: res.fullName,
-        faculty: res.faculty,
-        prodi: res.prodi,
-      });
+      axios
+        .get(url, {
+          headers: {
+            Authorization: 'Bearer ' + res.token,
+          },
+        })
+        .then((resProfile) => {
+          const image = `data:image/jpeg;base64, ${resProfile.data.imageBase64}`;
+          setStudentProfile({
+            regNumber: res.regNumber,
+            nim: res.nim,
+            fullName: res.fullName,
+            faculty: res.faculty,
+            prodi: res.prodi,
+            photo: image,
+          });
+        });
     });
   }, []);
 
-  const {regNumber, nim, fullName, faculty, prodi} = studentProfile;
+  const {regNumber, nim, fullName, faculty, prodi, photo} = studentProfile;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,6 +51,7 @@ const StudentCard = ({navigation}) => {
           titleHeader="Student ID Card"
           navigation={navigation}
           badge="level-1"
+          photo={studentProfile.photo}
         />
         <View style={styles.menuBoxContainer}>
           <PointBox />
@@ -49,9 +63,10 @@ const StudentCard = ({navigation}) => {
             faculty={faculty}
             prodi={prodi}
             validThru="08/21"
+            photo={photo}
           />
           <Gap height={30} />
-          <BadgeBox />
+          {/* <BadgeBox /> */}
         </View>
       </View>
     </SafeAreaView>
