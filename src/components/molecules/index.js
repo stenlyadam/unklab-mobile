@@ -9,6 +9,7 @@ import BadgeBox from './BadgeBox';
 import DaysBox from './DaysBox';
 import ScheduleBox from './ScheduleBox';
 import SaldoBox from './SaldoBox';
+import Loading from './Loading';
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   DaysBox,
   ScheduleBox,
   SaldoBox,
+  Loading,
 };

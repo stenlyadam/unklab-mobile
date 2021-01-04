@@ -1,10 +1,10 @@
-import axios from 'axios';
-import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {DataItem} from '../../components/atoms';
 import {Profile as HeaderProfile} from '../../components/molecules';
 import {getData} from '../../utils';
+import axios from 'axios';
+import moment from 'moment';
 
 const Profile = ({navigation}) => {
   const [studentProfile, setStudentProfile] = useState({
@@ -17,6 +17,7 @@ const Profile = ({navigation}) => {
     phoneNumber: '',
     address: '',
     fatherName: '',
+    photo: '',
   });
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const Profile = ({navigation}) => {
         })
         .then((res) => {
           const data = res.data.data[0];
-          console.log('respons,', res);
+          const image64 = `data:image/jpeg;base64, ${res.data.imageBase64}`;
           setStudentProfile({
             regNumber: data.REGISTRATION_NUMBER,
             nim: data.NIM,
@@ -43,11 +44,13 @@ const Profile = ({navigation}) => {
             pob: data.POB,
             phoneNumber: data.HANDPHONE,
             address: data.ADDRESS,
-            fatherName: data.father_name,
+            fatherName: data.FATHER_NAME,
+            motherName: data.MOTHER_NAME,
+            photo: image64,
           });
         });
-    }, []);
-  });
+    });
+  }, []);
 
   const {
     regNumber,
@@ -61,6 +64,8 @@ const Profile = ({navigation}) => {
     phoneNumber,
     address,
     fatherName,
+    motherName,
+    photo,
   } = studentProfile;
 
   return (
@@ -72,9 +77,8 @@ const Profile = ({navigation}) => {
           nim={nim}
           faculty={faculty}
           prodi={prodi}
-          arrowBack
           titleHeader="Student Profile"
-          navigation={navigation}
+          photo={photo}
           type2
         />
         <View style={styles.informationWrapper}>
@@ -83,18 +87,19 @@ const Profile = ({navigation}) => {
             description={`${regNumber}@student.unklab.ac.id`}
           />
           <DataItem label="Gender" description={gender} />
-          <DataItem label="Date of Birth" description={`${pob}, ${dob}`} />
-          <DataItem label="Phone No" description={phoneNumber} />
           <DataItem
-            label="Parent / Guardian Full Name"
-            description={fatherName}
+            label="Place, Date of Birth"
+            description={`${pob}, ${dob}`}
           />
+          <DataItem label="Phone No" description={phoneNumber} />
+          <DataItem label="Father Name" description={fatherName} />
+          <DataItem label="Mother Name" description={motherName} />
           {/*
           <DataItem
             label="Parent / Guardian Phone No"
             description="08114381718"
           /> */}
-          <DataItem label="Current Address" description={address} />
+          <DataItem label="Address" description={address} />
         </View>
       </View>
     </SafeAreaView>

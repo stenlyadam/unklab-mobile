@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {Header} from '..';
+import {colors} from '../../../utils';
 // import {
 //   IconBadgeLevel1,
 //   IconBadgeLevel2,
@@ -77,9 +78,8 @@ const Profile = ({
           <Image
             style={styles.photo}
             source={{
-              uri: photo,
+              uri: photo === '' ? undefined : photo,
             }}
-            resizeMode="contain"
           />
         </View>
         <View style={styles.profile}>
@@ -95,14 +95,14 @@ export default Profile;
 
 const styles = StyleSheet.create({
   container: (type2) => ({
-    backgroundColor: '#34048A',
-    height: type2 ? 200 : 300,
-    borderBottomRightRadius: type2 ? 10 : 30,
-    borderBottomLeftRadius: type2 ? 10 : 0,
+    backgroundColor: colors.primary,
+    height: type2 ? 250 : 300,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
     paddingRight: 20,
   }),
   containerType3: {
-    backgroundColor: '#34048A',
+    backgroundColor: colors.primary,
   },
   profileWrapper: {
     flexDirection: 'row',
@@ -121,28 +121,29 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
     borderRadius: 10,
+    resizeMode: 'contain',
   },
   name: {
     fontSize: 18,
-    color: '#FFF014',
+    color: colors.text.tertiary,
     fontWeight: '400',
   },
   nim: {
     fontSize: 14,
-    color: 'white',
+    color: colors.white,
   },
   badgeWrapper: {
     flex: 1,
     alignItems: 'flex-end',
   },
   fakultas: {
-    color: 'white',
+    color: colors.white,
     fontSize: 12,
     fontWeight: '600',
     textAlign: 'right',
   },
   prodi: {
-    color: 'white',
+    color: colors.white,
     fontSize: 12,
     fontWeight: '600',
     textAlign: 'right',

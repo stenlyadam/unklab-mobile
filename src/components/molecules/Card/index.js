@@ -26,17 +26,17 @@ const Card = ({regNumber, nim, fullName, faculty, prodi, validThru, photo}) => {
             <Text style={styles.regNumber}>{regNumber}</Text>
           </View>
           <Image
-            source={{uri: photo}}
-            style={{width: 100, height: 100, borderRadius: 100 / 2}}
+            source={{uri: photo === '' ? undefined : photo}}
+            style={styles.photo}
           />
         </View>
         <Gap height={5} />
         <View style={styles.validThruWrapper}>
           <Text style={styles.prodi}>{prodi}</Text>
-          <View>
+          {/* <View>
             <Text style={styles.validThru}>VALID THRU</Text>
             <Text style={styles.date}>{validThru}</Text>
-          </View>
+          </View> */}
         </View>
         <Text style={styles.name}>{fullName}</Text>
 
@@ -92,8 +92,8 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
     paddingHorizontal: 20,
-    width: 370,
-    height: 280,
+    width: '100%',
+    height: 250,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -111,6 +111,11 @@ const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
     marginLeft: 10,
+  },
+  photo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
   },
   logo: {
     width: 50,
@@ -187,7 +192,7 @@ const styles = StyleSheet.create({
   },
   tap: {
     position: 'absolute',
-    top: 260,
+    top: 230,
     width: 241,
     height: 30,
     backgroundColor: '#341948',

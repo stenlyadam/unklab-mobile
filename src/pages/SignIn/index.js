@@ -1,12 +1,21 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {Button, CheckBox, Gap, Link, TextInput} from '../../components';
+import {
+  Button,
+  CheckBox,
+  Gap,
+  Link,
+  Loading,
+  TextInput,
+} from '../../components';
 import axios from 'axios';
-import {storeData} from '../../utils';
+import {colors, storeData} from '../../utils';
+import {showMessage} from 'react-native-flash-message';
 
 const SignIn = ({navigation}) => {
   const [regNumber, setRegNumber] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onSignIn = () => {
     const loginUrl = 'http://bni.unklab.ac.id:3000/api/auth/login/';
@@ -16,7 +25,7 @@ const SignIn = ({navigation}) => {
       username: regNumber,
       password: password,
     };
-
+    setLoading(true);
     axios
       .post(loginUrl, data, {
         headers: {
@@ -42,42 +51,66 @@ const SignIn = ({navigation}) => {
               token: token,
             };
             storeData('user', userData);
+            setLoading(false);
             navigation.navigate('MainApp');
+          })
+          .catch((err) => {
+            setLoading(false);
+            console.log('Error, ', err.data);
+            showMessage({
+              message: err.message,
+              type: 'default',
+              backgroundColor: 'crimson',
+              color: '#FFFF',
+            });
           });
+      })
+      .catch((err) => {
+        console.log('Error, ', err.data);
+        setLoading(false);
+        showMessage({
+          message: err.message,
+          type: 'default',
+          backgroundColor: 'crimson',
+          color: '#FFFF',
+        });
       });
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.wrapper}>
-        <Gap height={14} />
-        <Text style={styles.welcome}>Welcome, please sign in!</Text>
-        <Text style={styles.description}>
-          Please use your registration number and password to sign in to your
-          account.
-        </Text>
-        <Gap height={35} />
-        <TextInput
-          label="Registration No"
-          placeholder="S123456789"
-          value={regNumber}
-          onChangeText={(value) => setRegNumber(value)}
-        />
-        <Gap height={31} />
-        <TextInput
-          label="Password"
-          placeholder="***********"
-          secureTextEntry
-          value={password}
-          onChangeText={(value) => setPassword(value)}
-        />
-        <View style={styles.rememberMeWrapper}>
-          <CheckBox label="Remember me" />
-          <Link label="Forgot Password?" />
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.wrapper}>
+          <Gap height={14} />
+          <Text style={styles.welcome}>Welcome, please sign in!</Text>
+          <Text style={styles.description}>
+            Please use your registration number and password to sign in to your
+            account.
+          </Text>
+          <Gap height={35} />
+          <TextInput
+            label="Registration No"
+            placeholder="S123456789"
+            value={regNumber}
+            onChangeText={(value) => setRegNumber(value)}
+          />
+          <Gap height={31} />
+          <TextInput
+            label="Password"
+            placeholder="***********"
+            secureTextEntry
+            value={password}
+            onChangeText={(value) => setPassword(value)}
+          />
+          <View style={styles.rememberMeWrapper}>
+            <CheckBox label="Remember me" />
+            <Link label="Forgot Password?" />
+          </View>
+          <Button label="Sign In Now" paddingVertical={15} onPress={onSignIn} />
         </View>
-        <Button label="Sign In Now" paddingVertical={15} onPress={onSignIn} />
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+      {loading && <Loading />}
+    </>
   );
 };
 
@@ -86,7 +119,7 @@ export default SignIn;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   wrapper: {
     marginHorizontal: 47,

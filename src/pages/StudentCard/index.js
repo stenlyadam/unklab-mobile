@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Gap} from '../../components/atoms';
-import {Card, PointBox, Profile} from '../../components/molecules';
+import {Card, Loading, Profile} from '../../components/molecules';
 import {getData} from '../../utils';
 
 const StudentCard = ({navigation}) => {
@@ -15,8 +15,11 @@ const StudentCard = ({navigation}) => {
     photo: '',
   });
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const url = 'http://bni.unklab.ac.id:3000/api/profile/';
+    setLoading(true);
     getData('user').then((res) => {
       axios
         .get(url, {
@@ -34,6 +37,7 @@ const StudentCard = ({navigation}) => {
             prodi: res.prodi,
             photo: image,
           });
+          setLoading(false);
         });
     });
   }, []);
@@ -41,35 +45,33 @@ const StudentCard = ({navigation}) => {
   const {regNumber, nim, fullName, faculty, prodi, photo} = studentProfile;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.wrapper}>
-        <Profile
-          studentName={studentProfile.fullName}
-          registrationNo={studentProfile.regNumber}
-          nim={studentProfile.nim}
-          arrowBack
-          titleHeader="Student ID Card"
-          navigation={navigation}
-          badge="level-1"
-          photo={studentProfile.photo}
-        />
-        <View style={styles.menuBoxContainer}>
-          <PointBox />
-          <Gap height={15} />
-          <Card
-            regNumber={regNumber}
-            nim={nim}
-            fullName={fullName}
-            faculty={faculty}
-            prodi={prodi}
-            validThru="08/21"
-            photo={photo}
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.wrapper}>
+          <Profile
+            arrowBack
+            titleHeader="ID Card"
+            navigation={navigation}
+            headerOnly
           />
-          <Gap height={30} />
-          {/* <BadgeBox /> */}
+          <View style={styles.menuBoxContainer}>
+            <Gap height={15} />
+            <Card
+              regNumber={regNumber}
+              nim={nim}
+              fullName={fullName}
+              faculty={faculty}
+              prodi={prodi}
+              validThru="08/21"
+              photo={photo}
+            />
+            <Gap height={30} />
+            {/* <BadgeBox /> */}
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+      {loading && <Loading />}
+    </>
   );
 };
 
@@ -87,7 +89,8 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
   },
   menuBoxContainer: {
-    marginTop: -60,
+    marginTop: 30,
+    marginHorizontal: 10,
     alignItems: 'center',
   },
   newsHeaderWrapper: {

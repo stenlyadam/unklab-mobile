@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {colors} from '../../../utils';
 import {Button} from '../../atoms';
 
 const MenuBox = ({navigation}) => {
@@ -47,16 +48,16 @@ export default MenuBox;
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 20,
-    width: 370,
+    width: '100%',
     // height: 197,
     height: 150,
     borderRadius: 10,
-    backgroundColor: 'white',
-    // flexDirection: 'row',
+    backgroundColor: colors.white,
+    flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 5,

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {Button, Gap} from '../../components/atoms';
 import {MenuBox, NewsCard, Profile} from '../../components/molecules';
-import {getData} from '../../utils';
+import {colors, getData} from '../../utils';
 
 const Dashboard = ({navigation}) => {
   const [studentProfile, setStudentProfile] = useState({
@@ -61,7 +61,6 @@ const Dashboard = ({navigation}) => {
             paddingVertical={4}
           />
         </View>
-
         <NewsCard />
       </View>
     </SafeAreaView>
@@ -73,7 +72,7 @@ export default Dashboard;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#34048A',
+    backgroundColor: colors.primary,
   },
   wrapper: {
     flex: 1,
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
   },
   menuBoxContainer: {
     marginTop: -80,
+    marginHorizontal: 20,
     alignItems: 'center',
   },
   newsHeaderWrapper: {
@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
   latestNewsLabel: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#908A8A',
+    color: colors.text.secondary,
   },
 });
