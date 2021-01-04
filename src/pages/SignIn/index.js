@@ -1,16 +1,10 @@
-import React, {useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {
-  Button,
-  CheckBox,
-  Gap,
-  Link,
-  Loading,
-  TextInput,
-} from '../../components';
 import axios from 'axios';
-import {colors, storeData} from '../../utils';
+import React, {useState} from 'react';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
+import {LogoUnklab} from '../../assets';
+import {Button, Gap, Loading, TextInput} from '../../components';
+import {colors, storeData} from '../../utils';
 
 const SignIn = ({navigation}) => {
   const [regNumber, setRegNumber] = useState('');
@@ -51,28 +45,29 @@ const SignIn = ({navigation}) => {
               token: token,
             };
             storeData('user', userData);
+            setRegNumber('');
+            setPassword('');
             setLoading(false);
             navigation.navigate('MainApp');
           })
           .catch((err) => {
             setLoading(false);
-            console.log('Error, ', err.data);
+            console.log('Error, ', err);
             showMessage({
               message: err.message,
               type: 'default',
-              backgroundColor: 'crimson',
-              color: '#FFFF',
+              backgroundColor: colors.background.error,
+              color: colors.white,
             });
           });
       })
       .catch((err) => {
-        console.log('Error, ', err.data);
         setLoading(false);
         showMessage({
           message: err.message,
           type: 'default',
-          backgroundColor: 'crimson',
-          color: '#FFFF',
+          backgroundColor: colors.background.error,
+          color: colors.white,
         });
       });
   };
@@ -81,6 +76,7 @@ const SignIn = ({navigation}) => {
     <>
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
+          <Image source={LogoUnklab} style={styles.logo} />
           <Gap height={14} />
           <Text style={styles.welcome}>Welcome, please sign in!</Text>
           <Text style={styles.description}>
@@ -102,10 +98,11 @@ const SignIn = ({navigation}) => {
             value={password}
             onChangeText={(value) => setPassword(value)}
           />
-          <View style={styles.rememberMeWrapper}>
+          {/* <View style={styles.rememberMeWrapper}>
             <CheckBox label="Remember me" />
             <Link label="Forgot Password?" />
-          </View>
+          </View> */}
+          <Gap height={40} />
           <Button label="Sign In Now" paddingVertical={15} onPress={onSignIn} />
         </View>
       </SafeAreaView>
@@ -125,6 +122,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 47,
     marginTop: 35,
   },
+  logo: {
+    width: 80,
+    height: 80,
+  },
   welcome: {
     fontSize: 20,
     fontWeight: '400',
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     maxWidth: 271,
-    color: '#908A8A',
+    color: colors.text.secondary,
     lineHeight: 20,
     fontWeight: '400',
   },

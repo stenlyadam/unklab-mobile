@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {DataItem} from '../../components/atoms';
-import {Profile as HeaderProfile} from '../../components/molecules';
-import {getData} from '../../utils';
+import {Loading, Profile as HeaderProfile} from '../../components/molecules';
+import {colors, getData} from '../../utils';
 import axios from 'axios';
 import moment from 'moment';
+import {showMessage} from 'react-native-flash-message';
 
 const Profile = ({navigation}) => {
   const [studentProfile, setStudentProfile] = useState({
@@ -19,10 +20,11 @@ const Profile = ({navigation}) => {
     fatherName: '',
     photo: '',
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const url = 'http://bni.unklab.ac.id:3000/api/profile/';
-
+    setLoading(true);
     getData('user').then((resStorage) => {
       axios
         .get(url, {
@@ -48,6 +50,16 @@ const Profile = ({navigation}) => {
             motherName: data.MOTHER_NAME,
             photo: image64,
           });
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          showMessage({
+            message: err.message,
+            type: 'default',
+            backgroundColor: colors.background.error,
+            color: colors.white,
+          });
         });
     });
   }, []);
@@ -69,40 +81,43 @@ const Profile = ({navigation}) => {
   } = studentProfile;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.wrapper}>
-        <HeaderProfile
-          studentName={fullName}
-          registrationNo={regNumber}
-          nim={nim}
-          faculty={faculty}
-          prodi={prodi}
-          titleHeader="Student Profile"
-          photo={photo}
-          type2
-        />
-        <View style={styles.informationWrapper}>
-          <DataItem
-            label="Email Address"
-            description={`${regNumber}@student.unklab.ac.id`}
+    <>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.wrapper}>
+          <HeaderProfile
+            studentName={fullName}
+            registrationNo={regNumber}
+            nim={nim}
+            faculty={faculty}
+            prodi={prodi}
+            titleHeader="Student Profile"
+            photo={photo}
+            type2
           />
-          <DataItem label="Gender" description={gender} />
-          <DataItem
-            label="Place, Date of Birth"
-            description={`${pob}, ${dob}`}
-          />
-          <DataItem label="Phone No" description={phoneNumber} />
-          <DataItem label="Father Name" description={fatherName} />
-          <DataItem label="Mother Name" description={motherName} />
-          {/*
+          <View style={styles.informationWrapper}>
+            <DataItem
+              label="Email Address"
+              description={`${regNumber}@student.unklab.ac.id`}
+            />
+            <DataItem label="Gender" description={gender} />
+            <DataItem
+              label="Place, Date of Birth"
+              description={`${pob}, ${dob}`}
+            />
+            <DataItem label="Phone No" description={phoneNumber} />
+            <DataItem label="Father Name" description={fatherName} />
+            <DataItem label="Mother Name" description={motherName} />
+            {/*
           <DataItem
             label="Parent / Guardian Phone No"
             description="08114381718"
           /> */}
-          <DataItem label="Address" description={address} />
+            <DataItem label="Address" description={address} />
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+      {loading && <Loading />}
+    </>
   );
 };
 

@@ -1,17 +1,41 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const ScheduleItem = ({time, courseName, teacher, room, type}) => {
+const ScheduleItem = ({
+  time,
+  courseNameInd,
+  courseNameEng,
+  teacher,
+  room,
+  parallel,
+  type,
+  days,
+  grade,
+  percentage,
+}) => {
   return (
     <View style={styles.container}>
       <Text style={[styles.color(type), styles.time]}>{time}</Text>
       <View style={styles.courseWrapper}>
         <Text style={[styles.color(type), styles.courseName]}>
-          {courseName}
+          {`${courseNameEng} - ${parallel}`}
         </Text>
-        <Text style={[styles.color(type), styles.teacher]}>{teacher}</Text>
+        <Text
+          style={[
+            styles.color(type),
+            styles.courseName,
+          ]}>{`[${days}] at ${room}`}</Text>
+        <Text
+          style={[
+            styles.color(type),
+            styles.teacher,
+          ]}>{`Teacher: ${teacher}`}</Text>
       </View>
-      <Text style={[styles.color(type), styles.room]}>{room}</Text>
+      <Text
+        style={[
+          styles.color(type),
+          styles.room,
+        ]}>{`${grade} (${percentage})`}</Text>
     </View>
   );
 };
@@ -38,15 +62,15 @@ const styles = StyleSheet.create({
     borderBottomColor: '#979797',
   },
   time: {
-    fontSize: 12,
+    fontSize: 10,
     width: '23%',
     fontWeight: '700',
   },
   courseWrapper: {
-    width: '54%',
+    width: '65%',
   },
   courseName: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '700',
   },
   teacher: {
@@ -55,8 +79,8 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   room: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '700',
-    width: '23%',
+    width: '15%',
   },
 });

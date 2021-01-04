@@ -15,7 +15,7 @@ const MenuBox = ({navigation}) => {
       <Button
         type="icon-with-label"
         icon="icon-schedule"
-        label="Schedule"
+        label="Schedule And Grade"
         onPress={() => navigation.navigate('Schedule')}
       />
       <Button

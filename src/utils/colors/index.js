@@ -4,6 +4,7 @@ const listColors = {
   black: '#000',
   grey1: '#908A8A',
   yellow: '#FFF014',
+  red1: '#ef4f4f',
 };
 
 export const colors = {
@@ -13,5 +14,8 @@ export const colors = {
   text: {
     secondary: listColors.grey1,
     tertiary: listColors.yellow,
+  },
+  background: {
+    error: listColors.red1,
   },
 };

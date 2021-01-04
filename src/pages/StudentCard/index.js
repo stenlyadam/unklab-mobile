@@ -3,7 +3,8 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import {Gap} from '../../components/atoms';
 import {Card, Loading, Profile} from '../../components/molecules';
-import {getData} from '../../utils';
+import {colors, getData} from '../../utils';
+import {showMessage} from 'react-native-flash-message';
 
 const StudentCard = ({navigation}) => {
   const [studentProfile, setStudentProfile] = useState({
@@ -38,6 +39,15 @@ const StudentCard = ({navigation}) => {
             photo: image,
           });
           setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          showMessage({
+            message: err.message,
+            type: 'default',
+            backgroundColor: colors.background.error,
+            color: colors.white,
+          });
         });
     });
   }, []);

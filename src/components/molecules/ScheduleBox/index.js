@@ -2,46 +2,33 @@ import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {ScheduleItem} from '../../atoms';
 
-const ScheduleBox = () => {
+const ScheduleBox = ({schedule, day}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
-        Class Schedule for{' '}
-        <Text style={[styles.title, styles.day]}>Thursday</Text>
+        Class Schedule for <Text style={[styles.title, styles.day]}>{day}</Text>
       </Text>
       <View style={styles.headerWrapper}>
         <Text style={styles.time}>TIME</Text>
         <Text style={styles.course}>COURSE</Text>
-        <Text style={styles.room}>ROOM</Text>
+        <Text style={styles.room}>GRADE</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <ScheduleItem
-          time="07.10 - 08.30"
-          courseName="Introduction to Computing A"
-          teacher="Joe Yuan Yulian Mambu"
-          room="GK1-303"
-          type="major"
-        />
-        <ScheduleItem
-          time="08.40 - 10.00"
-          courseName="Indonesian Civics A"
-          teacher="Max Silinaung"
-          room="GK1-101"
-          type="general"
-        />
-        <ScheduleItem
-          time="08.10 - 11.30"
-          courseName="Chapel Program"
-          teacher="Faculty of Computer Science"
-          room="Fern Wallace Hall"
-        />
-        <ScheduleItem
-          time="13.10 - 14.30"
-          courseName="Computer Programming A"
-          teacher="Green Arther Sandag"
-          room="GA-201"
-          type="minor"
-        />
+        {schedule.map((item) => (
+          <ScheduleItem
+            key={item.subject_code}
+            time={`${item.start} - ${item.end}`}
+            courseNameInd={item.name_ind}
+            courseNameEng={item.name_eng}
+            teacher={item.name}
+            room={item.class_name}
+            parallel={item.parallel}
+            credit={item.credit}
+            days={item.days}
+            grade={item.grade}
+            percentage={item.percentage}
+          />
+        ))}
       </ScrollView>
     </View>
   );
@@ -52,10 +39,18 @@ export default ScheduleBox;
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '70%',
+    height: '80%',
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11,
   },
   headerWrapper: {
     flexDirection: 'row',
@@ -71,17 +66,17 @@ const styles = StyleSheet.create({
   day: {fontWeight: '700'},
   time: {
     width: '23%',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '700',
   },
   course: {
-    width: '54%',
-    fontSize: 14,
+    width: '63%',
+    fontSize: 12,
     fontWeight: '700',
   },
   room: {
-    width: '23%',
-    fontSize: 14,
+    width: '15%',
+    fontSize: 12,
     fontWeight: '700',
   },
 });
