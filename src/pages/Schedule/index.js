@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {showMessage} from 'react-native-flash-message';
 import {DaysBox, Gap, Loading, Profile, ScheduleBox} from '../../components';
 import {colors, getData, storeData} from '../../utils';
-import axios from 'axios';
 
 const Schedule = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [schedule, setSchedule] = useState([]);
   const [semester, setSemester] = useState('');
-  const [day, setDay] = useState('All Days');
+  const [isRegister, setIsRegister] = useState(true);
+  const [day, setDay] = useState('Senin - Jumat');
 
   const filterSchedule = (data) => {
     const filterData = data.filter((item) => item.grade !== 'PASS');
@@ -41,18 +41,14 @@ const Schedule = ({navigation}) => {
         .then((res) => {
           const dataSemester = res.data.data[0];
           const data = res.data.data;
+
           setSemester(dataSemester.semester_description);
           filterSchedule(data);
           setLoading(false);
         })
-        .catch((err) => {
+        .catch(() => {
           setLoading(false);
-          showMessage({
-            message: err.message,
-            type: 'default',
-            backgroundColor: colors.background.error,
-            color: colors.white,
-          });
+          setIsRegister(false);
         });
     });
   }, []);
@@ -69,7 +65,7 @@ const Schedule = ({navigation}) => {
         <View style={styles.boxWrapper}>
           <DaysBox semester={semester} onChangeDay={(value) => setDay(value)} />
           <Gap height={20} />
-          <ScheduleBox schedule={schedule} day={day} />
+          <ScheduleBox schedule={schedule} day={day} isRegister={isRegister} />
         </View>
       </SafeAreaView>
       {loading && <Loading />}

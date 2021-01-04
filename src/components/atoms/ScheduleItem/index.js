@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../../utils';
 
 const ScheduleItem = ({
   time,
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     width: '23%',
     fontWeight: '700',
+    color: colors.primary,
   },
   courseWrapper: {
     width: '65%',
@@ -72,15 +74,18 @@ const styles = StyleSheet.create({
   courseName: {
     fontSize: 10,
     fontWeight: '700',
+    color: colors.primary,
   },
   teacher: {
     fontSize: 10,
     fontWeight: '300',
     fontStyle: 'italic',
+    color: colors.primary,
   },
   room: {
     fontSize: 10,
     fontWeight: '700',
     width: '15%',
+    color: colors.primary,
   },
 });

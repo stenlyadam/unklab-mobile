@@ -1,35 +1,46 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../../utils';
 import {ScheduleItem} from '../../atoms';
 
-const ScheduleBox = ({schedule, day}) => {
+const ScheduleBox = ({schedule, day, isRegister}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        Class Schedule for <Text style={[styles.title, styles.day]}>{day}</Text>
-      </Text>
-      <View style={styles.headerWrapper}>
-        <Text style={styles.time}>TIME</Text>
-        <Text style={styles.course}>COURSE</Text>
-        <Text style={styles.room}>GRADE</Text>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {schedule.map((item) => (
-          <ScheduleItem
-            key={item.subject_code}
-            time={`${item.start} - ${item.end}`}
-            courseNameInd={item.name_ind}
-            courseNameEng={item.name_eng}
-            teacher={item.name}
-            room={item.class_name}
-            parallel={item.parallel}
-            credit={item.credit}
-            days={item.days}
-            grade={item.grade}
-            percentage={item.percentage}
-          />
-        ))}
-      </ScrollView>
+      {isRegister && (
+        <>
+          <Text style={styles.title}>
+            Class Schedule for{' '}
+            <Text style={[styles.title, styles.day]}>{day}</Text>
+          </Text>
+          <View style={styles.headerWrapper}>
+            <Text style={styles.time}>TIME</Text>
+            <Text style={styles.course}>COURSE</Text>
+            <Text style={styles.room}>GRADE</Text>
+          </View>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {schedule.map((item) => (
+              <ScheduleItem
+                key={item.subject_code}
+                time={`${item.start} - ${item.end}`}
+                courseNameInd={item.name_ind}
+                courseNameEng={item.name_eng}
+                teacher={item.name}
+                room={item.class_name}
+                parallel={item.parallel}
+                credit={item.credit}
+                days={item.days}
+                grade={item.grade}
+                percentage={item.percentage}
+              />
+            ))}
+          </ScrollView>
+        </>
+      )}
+      {!isRegister && (
+        <Text style={styles.errorMessage}>
+          Anda tidak mempunyai jadwal kelas di semester ini
+        </Text>
+      )}
     </View>
   );
 };
@@ -58,7 +69,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: '#34048A',
+    color: colors.primary,
     fontWeight: '400',
     textAlign: 'center',
     marginBottom: 20,
@@ -68,15 +79,24 @@ const styles = StyleSheet.create({
     width: '23%',
     fontSize: 12,
     fontWeight: '700',
+    color: colors.primary,
   },
   course: {
     width: '63%',
     fontSize: 12,
     fontWeight: '700',
+    color: colors.primary,
   },
   room: {
     width: '15%',
     fontSize: 12,
     fontWeight: '700',
+    color: colors.primary,
+  },
+  errorMessage: {
+    fontSize: 18,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: colors.primary,
   },
 });

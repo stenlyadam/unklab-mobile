@@ -54,7 +54,9 @@ const SignIn = ({navigation}) => {
             setLoading(false);
             console.log('Error, ', err);
             showMessage({
-              message: err.message,
+              message: err.message.includes('code 500')
+                ? 'Wrong Registration Number or Password'
+                : err.message,
               type: 'default',
               backgroundColor: colors.background.error,
               color: colors.white,
@@ -63,6 +65,7 @@ const SignIn = ({navigation}) => {
       })
       .catch((err) => {
         setLoading(false);
+        console.log('error', err.message);
         showMessage({
           message: err.message,
           type: 'default',
