@@ -1,10 +1,38 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {DummyQrCode, DummySignature, LogoUnklab} from '../../../assets';
+import RNQRGenerator from 'rn-qr-generator';
+import {showMessage} from 'react-native-flash-message';
+import {LogoUnklab, TandaTanganRektor} from '../../../assets';
+import {colors, getData} from '../../../utils';
 import {Gap} from '../../atoms';
 
 const Card = ({regNumber, nim, fullName, faculty, prodi, validThru, photo}) => {
   const [showFrontCard, setShowFrontCard] = useState(true);
+  const [qrCode, setQrCode] = useState('');
+
+  useEffect(() => {
+    getData('user').then((res) => {
+      RNQRGenerator.generate({
+        value: res.nim, // required
+        height: 100,
+        width: 100,
+        base64: false, // default 'false'
+        correctionLevel: 'L', // default is 'H', also available 'M' and 'Q'.
+      })
+        .then((response) => {
+          const {uri} = response;
+          setQrCode(uri);
+        })
+        .catch((err) => {
+          showMessage({
+            message: `Cannot create QR Code ${err}`,
+            type: 'default',
+            backgroundColor: colors.background.error,
+            color: colors.white,
+          });
+        });
+    });
+  }, []);
 
   if (showFrontCard) {
     return (
@@ -56,11 +84,18 @@ const Card = ({regNumber, nim, fullName, faculty, prodi, validThru, photo}) => {
           responsible for any misuse of this Student ID card.
         </Text>
         <View style={styles.qrCodeWrapper}>
-          <DummyQrCode />
+          {qrCode !== '' && (
+            <Image source={{uri: qrCode}} style={styles.qrcode} />
+          )}
           <View style={styles.presidentWrapper}>
-            <DummySignature />
-            <Text style={styles.presidentName}>Marthen Sengkey, PhD</Text>
-            <Text style={styles.president}>President</Text>
+            <Image
+              source={TandaTanganRektor}
+              style={styles.tandaTanganRektor}
+            />
+            <View style={styles.presidentNameWrapper}>
+              <Text style={styles.presidentName}>Marthen Sengkey, PhD</Text>
+              <Text style={styles.president}>President</Text>
+            </View>
           </View>
         </View>
 
@@ -93,9 +128,9 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     width: '100%',
-    height: 250,
+    height: 290,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 5,
@@ -103,11 +138,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
     elevation: 11,
-    backgroundColor: '#170B3B',
+    backgroundColor: colors.background.card,
   },
   headerWrapper: {
     flexDirection: 'row',
   },
+
   header: {
     justifyContent: 'center',
     marginLeft: 10,
@@ -121,6 +157,17 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
+  qrcode: {
+    width: 120,
+    height: 120,
+  },
+  tandaTanganRektor: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+    marginLeft: -20,
+    marginTop: -60,
+  },
   profileWrapper: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -133,69 +180,70 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
+    marginTop: 10,
   },
   nimTitle: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'right',
     fontSize: 10,
     fontWeight: '400',
   },
   nim: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'right',
     fontSize: 14,
     fontWeight: '700',
   },
   regNumberTitle: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'right',
     fontSize: 10,
     fontWeight: '400',
   },
   regNumber: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'right',
     fontSize: 14,
     fontWeight: '700',
   },
   validThru: {
-    color: 'white',
+    color: colors.white,
     fontSize: 8,
   },
   date: {
-    color: 'white',
+    color: colors.white,
     fontSize: 12,
     textAlign: 'right',
     fontWeight: '700',
   },
   prodi: {
-    color: '#FFF014',
-    fontSize: 12,
+    color: colors.text.tertiary,
+    fontSize: 14,
     fontWeight: '400',
   },
   name: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '400',
     color: 'white',
     maxWidth: 230,
     textTransform: 'uppercase',
   },
   unklab: {
-    color: 'white',
+    color: colors.white,
     fontSize: 18,
     textTransform: 'uppercase',
   },
   fakultas: {
-    color: 'white',
+    color: colors.white,
     fontSize: 12,
     fontWeight: '400',
   },
   tap: {
     position: 'absolute',
-    top: 230,
+    top: 270,
     width: 241,
     height: 30,
-    backgroundColor: '#341948',
+    backgroundColor: colors.background.tap,
     alignItems: 'center',
     borderBottomRightRadius: 10,
     borderTopLeftRadius: 10,
@@ -203,10 +251,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tapToSee: {
-    color: 'white',
+    color: colors.white,
   },
   disclaimer: {
-    color: 'white',
+    color: colors.white,
     fontSize: 6,
     textAlign: 'center',
     marginTop: -10,
@@ -223,35 +271,38 @@ const styles = StyleSheet.create({
   presidentName: {
     fontSize: 12,
     fontWeight: '200',
-    color: 'white',
+    color: colors.white,
+  },
+  presidentNameWrapper: {
+    marginTop: -50,
   },
   president: {
     fontSize: 10,
     fontWeight: '200',
-    color: 'white',
+    color: colors.white,
   },
   address: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'center',
     fontSize: 8,
   },
   phoneNumber: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'center',
     fontSize: 8,
   },
   fax: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'center',
     fontSize: 8,
   },
   email: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'center',
     fontSize: 8,
   },
   website: {
-    color: 'white',
+    color: colors.white,
     textAlign: 'center',
     fontSize: 8,
   },

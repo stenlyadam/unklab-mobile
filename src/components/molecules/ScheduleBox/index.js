@@ -38,7 +38,7 @@ const ScheduleBox = ({schedule, day, isRegister}) => {
       )}
       {!isRegister && (
         <Text style={styles.errorMessage}>
-          Anda tidak mempunyai jadwal kelas di semester ini
+          Anda belum mempunyai jadwal kelas di semester ini
         </Text>
       )}
     </View>

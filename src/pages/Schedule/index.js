@@ -24,7 +24,9 @@ const Schedule = ({navigation}) => {
 
   useEffect(() => {
     getData('schedule').then((res) => {
-      filterScheduleByDay(res, day);
+      if (res !== undefined) {
+        filterScheduleByDay(res, day);
+      }
     });
   }, [day]);
 
@@ -41,7 +43,6 @@ const Schedule = ({navigation}) => {
         .then((res) => {
           const dataSemester = res.data.data[0];
           const data = res.data.data;
-
           setSemester(dataSemester.semester_description);
           filterSchedule(data);
           setLoading(false);

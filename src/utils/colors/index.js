@@ -1,5 +1,7 @@
 const listColors = {
   purple1: '#34048A',
+  purple2: '#170B3B',
+  purple3: '#341948',
   white: 'white',
   black: '#000',
   grey1: '#908A8A',
@@ -17,5 +19,7 @@ export const colors = {
   },
   background: {
     error: listColors.red1,
+    card: listColors.purple2,
+    tap: listColors.purple3,
   },
 };
