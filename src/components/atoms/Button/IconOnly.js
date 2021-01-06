@@ -7,6 +7,7 @@ import {
   IconClose,
   IconDownload,
   IconInfo,
+  IconLogout,
   IconNotification,
   IconPay,
   IconSearch,
@@ -32,6 +33,8 @@ const IconOnly = ({icon, onPress}) => {
       return <IconPay />;
     } else if (icon === 'icon-close') {
       return <IconClose />;
+    } else if (icon === 'icon-logout') {
+      return <IconLogout />;
     }
     return <IconArrow />;
   };

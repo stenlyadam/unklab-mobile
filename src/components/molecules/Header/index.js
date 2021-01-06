@@ -10,6 +10,8 @@ const Header = ({
   onPress,
   search,
   download,
+  logout,
+  onLogout,
 }) => {
   if (type === 'with-label') {
     return (
@@ -30,6 +32,9 @@ const Header = ({
         {notification && <Button type="icon-only" icon="icon-notification" />}
         {search && <Button type="icon-only" icon="icon-search" />}
         {download && <Button type="icon-only" icon="icon-download" />}
+        {logout && (
+          <Button type="icon-only" icon="icon-logout" onPress={onLogout} />
+        )}
       </View>
     );
   }
@@ -47,13 +52,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 14,
-    marginHorizontal: 18,
+    marginLeft: 16,
+    marginRight: 10,
   },
   wrapper: {
     flexDirection: 'row',
   },
   title: {
-    fontSize: 18,
+    fontSize: 20,
     color: 'white',
     fontWeight: '700',
   },

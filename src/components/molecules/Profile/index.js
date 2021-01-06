@@ -25,6 +25,8 @@ const Profile = ({
   type2,
   headerOnly,
   download,
+  logout,
+  onLogout,
 }) => {
   // const Badge = () => {
   //   if (badge === 'level-1') {
@@ -64,6 +66,8 @@ const Profile = ({
         notification={notification}
         arrowBack={arrowBack}
         titleHeader={titleHeader}
+        logout={logout}
+        onLogout={onLogout}
         onPress={() => navigation.goBack()}
       />
       {type2 && (

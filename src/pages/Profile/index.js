@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {DataItem} from '../../components/atoms';
 import {Loading, Profile as HeaderProfile} from '../../components/molecules';
 import {colors, getData} from '../../utils';
@@ -95,24 +95,21 @@ const Profile = ({navigation}) => {
             type2
           />
           <View style={styles.informationWrapper}>
-            <DataItem
-              label="Email Address"
-              description={`${regNumber}@student.unklab.ac.id`}
-            />
-            <DataItem label="Gender" description={gender} />
-            <DataItem
-              label="Place, Date of Birth"
-              description={`${pob}, ${dob}`}
-            />
-            <DataItem label="Phone No" description={phoneNumber} />
-            <DataItem label="Father Name" description={fatherName} />
-            <DataItem label="Mother Name" description={motherName} />
-            {/*
-          <DataItem
-            label="Parent / Guardian Phone No"
-            description="08114381718"
-          /> */}
-            <DataItem label="Address" description={address} />
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <DataItem
+                label="Email Address"
+                description={`${regNumber}@student.unklab.ac.id`}
+              />
+              <DataItem label="Gender" description={gender} />
+              <DataItem
+                label="Place, Date of Birth"
+                description={`${pob}, ${dob}`}
+              />
+              <DataItem label="Phone No" description={phoneNumber} />
+              <DataItem label="Father Name" description={fatherName} />
+              <DataItem label="Mother Name" description={motherName} />
+              <DataItem label="Address" description={address} />
+            </ScrollView>
           </View>
         </View>
       </SafeAreaView>
@@ -135,6 +132,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 15,
   },
   informationWrapper: {
+    flex: 1,
     margin: 20,
   },
 });

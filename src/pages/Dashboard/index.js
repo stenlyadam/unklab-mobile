@@ -35,7 +35,7 @@ const Dashboard = ({navigation}) => {
       axios
         .get(url, {
           headers: {
-            Authorization: 'Bearer ' + res.token,
+            Authorization: `Bearer ${res.token}`,
           },
         })
         .then((resProfile) => {
@@ -48,16 +48,18 @@ const Dashboard = ({navigation}) => {
           });
           setLoading(false);
         })
-        .catch((err) => {
+        .catch(() => {
           setLoading(false);
+          navigation.replace('SignIn');
           showMessage({
-            message: err.message,
+            message: 'Session Timeout, Please Sign In Again',
             type: 'default',
             backgroundColor: colors.background.error,
             color: colors.white,
           });
         });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -70,6 +72,8 @@ const Dashboard = ({navigation}) => {
             nim={studentProfile.nim}
             titleHeader="Universitas Klabat"
             photo={studentProfile.photo}
+            logout={true}
+            onLogout={() => navigation.replace('SignIn')}
           />
           <View style={styles.menuBoxContainer}>
             <MenuBox navigation={navigation} />
