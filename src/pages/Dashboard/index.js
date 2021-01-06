@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Button, Gap} from '../../components/atoms';
-import {Loading, MenuBox, NewsCard, Profile} from '../../components/molecules';
-import {colors, getData} from '../../utils';
 import {showMessage} from 'react-native-flash-message';
+import {Gap} from '../../components/atoms';
+import {Loading, MenuBox, NewsCard, Profile} from '../../components/molecules';
+import {Fire} from '../../config';
+import {colors, getData} from '../../utils';
 
 const Dashboard = ({navigation}) => {
   const [studentProfile, setStudentProfile] = useState({
@@ -14,10 +15,22 @@ const Dashboard = ({navigation}) => {
     photo: '',
   });
   const [loading, setLoading] = useState(false);
+  const [news, setNews] = useState([]);
+
+  const getNews = () => {
+    Fire.database()
+      .ref('news/')
+      .on('value', (value) => {
+        if (value.val()) {
+          setNews(value.val());
+        }
+      });
+  };
 
   useEffect(() => {
     const url = 'http://bni.unklab.ac.id:3000/api/profile/';
     setLoading(true);
+    getNews();
     getData('user').then((res) => {
       axios
         .get(url, {
@@ -69,16 +82,24 @@ const Dashboard = ({navigation}) => {
                 Latest news from UNKLAB!
               </Text>
             </View>
-            <Button
+            {/* <Button
               label="All News"
               width={100}
               height={30}
               paddingVertical={4}
-            />
+            /> */}
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <NewsCard />
-            <NewsCard />
+            {news.map((item) => (
+              <NewsCard
+                key={item.id}
+                title={item.title}
+                image={item.image}
+                content={item.content}
+                rubrik={item.rubrik}
+                navigation={navigation}
+              />
+            ))}
           </ScrollView>
         </View>
       </SafeAreaView>

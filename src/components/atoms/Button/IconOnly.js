@@ -4,6 +4,7 @@ import {
   IconArrow,
   IconArrowWhite,
   IconCalendar,
+  IconClose,
   IconDownload,
   IconInfo,
   IconNotification,
@@ -29,6 +30,8 @@ const IconOnly = ({icon, onPress}) => {
       return <IconCalendar />;
     } else if (icon === 'icon-pay') {
       return <IconPay />;
+    } else if (icon === 'icon-close') {
+      return <IconClose />;
     }
     return <IconArrow />;
   };

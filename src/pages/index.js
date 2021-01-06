@@ -5,6 +5,7 @@ import Profile from './Profile';
 import StudentCard from './StudentCard';
 import Schedule from './Schedule';
 import AccountBalance from './AccountBalance';
+import Article from './Article';
 
 export {
   SignIn,
@@ -14,4 +15,5 @@ export {
   StudentCard,
   Schedule,
   AccountBalance,
+  Article,
 };

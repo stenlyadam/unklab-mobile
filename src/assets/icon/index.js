@@ -26,6 +26,7 @@ import IconCalendar from './ic-calendar';
 import IconRegistration from './ic-registration.svg';
 import IconWireless from './ic-wireless.svg';
 import IconMoney from './ic-money';
+import IconClose from './ic-close';
 
 export {
   IconArrow,
@@ -56,4 +57,5 @@ export {
   IconRegistration,
   IconWireless,
   IconMoney,
+  IconClose,
 };

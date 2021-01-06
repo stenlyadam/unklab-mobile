@@ -9,6 +9,7 @@ import {
   StudentCard,
   Schedule,
   AccountBalance,
+  Article,
 } from '../pages';
 import {BottomTabNavigator} from '../components';
 
@@ -55,6 +56,11 @@ const Router = () => {
       <Stack.Screen
         name="AccountBalance"
         component={AccountBalance}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Article"
+        component={Article}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
