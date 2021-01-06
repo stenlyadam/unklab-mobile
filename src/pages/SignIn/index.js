@@ -12,8 +12,8 @@ const SignIn = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   const onSignIn = () => {
-    const loginUrl = 'http://bni.unklab.ac.id:3000/api/auth/login/';
-    const profileUrl = 'http://bni.unklab.ac.id:3000/api/profile/';
+    const loginUrl = 'http://202.62.11.53:3000/api/auth/login/';
+    const profileUrl = 'http://202.62.11.53:3000/api/profile/';
 
     const data = {
       username: regNumber,

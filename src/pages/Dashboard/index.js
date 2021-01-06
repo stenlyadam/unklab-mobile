@@ -28,7 +28,7 @@ const Dashboard = ({navigation}) => {
   };
 
   useEffect(() => {
-    const url = 'http://bni.unklab.ac.id:3000/api/profile/';
+    const url = 'http://202.62.11.53:3000/api/profile/';
     setLoading(true);
     getNews();
     getData('user').then((res) => {

@@ -10,6 +10,7 @@ import {
   Schedule,
   AccountBalance,
   Article,
+  Grade,
 } from '../pages';
 import {BottomTabNavigator} from '../components';
 
@@ -61,6 +62,11 @@ const Router = () => {
       <Stack.Screen
         name="Article"
         component={Article}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Grade"
+        component={Grade}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

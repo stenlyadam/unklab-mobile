@@ -23,7 +23,7 @@ const Profile = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const url = 'http://bni.unklab.ac.id:3000/api/profile/';
+    const url = 'http://202.62.11.53:3000/api/profile/';
     setLoading(true);
     getData('user').then((resStorage) => {
       axios

@@ -6,6 +6,7 @@ import StudentCard from './StudentCard';
 import Schedule from './Schedule';
 import AccountBalance from './AccountBalance';
 import Article from './Article';
+import Grade from './Grade';
 
 export {
   SignIn,
@@ -16,4 +17,5 @@ export {
   Schedule,
   AccountBalance,
   Article,
+  Grade,
 };

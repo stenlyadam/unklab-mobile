@@ -1,37 +1,22 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {DaysBox, Gap, Loading, Profile, ScheduleBox} from '../../components';
-import {colors, getData, storeData} from '../../utils';
+import {GradeBox, Loading, Profile} from '../../components';
+import {colors, getData} from '../../utils';
 
-const Schedule = ({navigation}) => {
+const Grade = ({navigation}) => {
   const [loading, setLoading] = useState(false);
-  const [schedule, setSchedule] = useState([]);
+  const [grade, setGrade] = useState([]);
   const [semester, setSemester] = useState('');
   const [isRegister, setIsRegister] = useState(true);
-  const [day, setDay] = useState('Senin - Jumat');
 
   const filterSchedule = (data) => {
     const filterData = data.filter((item) => item.grade !== 'PASS');
-    setSchedule(filterData);
-    storeData('schedule', filterData);
-  };
-
-  const filterScheduleByDay = (data, dayName) => {
-    const filterData = data.filter((item) => item.days.includes(dayName));
-    setSchedule(filterData);
+    setGrade(filterData);
   };
 
   useEffect(() => {
-    getData('schedule').then((res) => {
-      if (res !== undefined) {
-        filterScheduleByDay(res, day);
-      }
-    });
-  }, [day]);
-
-  useEffect(() => {
-    const url = 'http://202.62.11.53:3000/api/schedule/';
+    const url = 'http://202.62.11.53:3000/api/last_semester_grade/';
     setLoading(true);
     getData('user').then((resStorage) => {
       axios
@@ -58,15 +43,13 @@ const Schedule = ({navigation}) => {
     <>
       <SafeAreaView style={styles.container}>
         <Profile
-          titleHeader="Schedule And Grade"
+          titleHeader="Last Semester Grade"
           arrowBack
           navigation={navigation}
           headerOnly
         />
         <View style={styles.boxWrapper}>
-          <DaysBox semester={semester} onChangeDay={(value) => setDay(value)} />
-          <Gap height={20} />
-          <ScheduleBox schedule={schedule} day={day} isRegister={isRegister} />
+          <GradeBox grade={grade} isRegister={isRegister} semester={semester} />
         </View>
       </SafeAreaView>
       {loading && <Loading />}
@@ -74,7 +57,7 @@ const Schedule = ({navigation}) => {
   );
 };
 
-export default Schedule;
+export default Grade;
 
 const styles = StyleSheet.create({
   container: {

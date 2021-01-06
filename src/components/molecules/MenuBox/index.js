@@ -25,6 +25,12 @@ const MenuBox = ({navigation}) => {
           label="Account Balance"
           onPress={() => navigation.navigate('AccountBalance')}
         />
+        <Button
+          type="icon-with-label"
+          icon="icon-grade"
+          label="Last Semester Grade"
+          onPress={() => navigation.navigate('Grade')}
+        />
       </View>
       {/* <Button
         type="icon-with-label"

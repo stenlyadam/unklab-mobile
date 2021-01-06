@@ -12,7 +12,7 @@ const AccountBalance = ({navigation}) => {
   const [financeNumber, setFinanceNumber] = useState('');
 
   useEffect(() => {
-    const url = 'http://bni.unklab.ac.id:3000/api/balance/';
+    const url = 'http://202.62.11.53:3000/api/balance/';
     setLoading(true);
     getData('user').then((resStorage) => {
       axios

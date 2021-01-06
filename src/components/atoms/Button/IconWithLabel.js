@@ -4,6 +4,7 @@ import {
   IconAcademic,
   IconAccountBalance,
   IconAchievement,
+  IconGrade,
   IconIDCard,
   IconPreRegistration,
   IconSchedule,
@@ -23,6 +24,8 @@ const IconWithLabel = ({onPress, icon, label}) => {
       return <IconPreRegistration />;
     } else if (icon === 'icon-account') {
       return <IconAccountBalance />;
+    } else if (icon === 'icon-grade') {
+      return <IconGrade />;
     }
     return <IconIDCard />;
   };
