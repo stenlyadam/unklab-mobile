@@ -1,17 +1,24 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Button} from '../../atoms';
+import NumberFormat from 'react-number-format';
 
-const SaldoBox = () => {
+const SaldoBox = ({balance}) => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.saldoLabelWrapper}>
-          <Text style={styles.saldoLabel}>saldo unklab e-money</Text>
+          <Text style={styles.saldoLabel}>Balance</Text>
         </View>
-        <Text style={styles.saldo}>Rp 199,000</Text>
+        <NumberFormat
+          value={balance}
+          displayType={'text'}
+          thousandSeparator={true}
+          renderText={(value) => (
+            <Text style={styles.saldo}>{`Rp. ${value}`}</Text>
+          )}
+        />
       </View>
-      <Button type="icon-only" icon="icon-pay" />
+      {/* <Button type="icon-only" icon="icon-pay" /> */}
     </View>
   );
 };
@@ -40,6 +47,8 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
   saldoLabelWrapper: {
     borderColor: 'black',
@@ -51,6 +60,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 10,
     fontWeight: '400',
+    textAlign: 'center',
   },
   saldo: {
     fontSize: 24,

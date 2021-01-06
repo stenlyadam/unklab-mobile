@@ -1,36 +1,80 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {IconRupiah} from '../../assets';
-import {Button, TransactionItem} from '../../components';
-import {Profile, SaldoBox} from '../../components/molecules';
+import {showMessage} from 'react-native-flash-message';
+import {Loading, Profile, SaldoBox} from '../../components/molecules';
+import {colors, getData} from '../../utils';
 
 const AccountBalance = ({navigation}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Profile
-        arrowBack
-        titleHeader="Account Balance"
-        navigation={navigation}
-        headerOnly
-        download
-      />
-      <View style={styles.headerWrapper}>
-        <Text style={styles.accountBalanceLabel}>Account Balance</Text>
-        <View style={styles.amountWrapper}>
-          <IconRupiah />
-          <Text style={styles.amountLabel}>1.650.000</Text>
-        </View>
+  const [balance, setBalance] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [financeNumber, setFinanceNumber] = useState('');
 
-        <Text style={styles.dateLabel}>December 17, 2020</Text>
-      </View>
-      <View style={styles.saldoBoxWrapper}>
-        <SaldoBox />
-      </View>
-      <View style={styles.detailTransactionHeaderWrapper}>
+  useEffect(() => {
+    const url = 'http://bni.unklab.ac.id:3000/api/balance/';
+    setLoading(true);
+    getData('user').then((resStorage) => {
+      axios
+        .get(url, {
+          headers: {
+            Authorization: 'Bearer ' + resStorage.token,
+          },
+        })
+        .then((res) => {
+          const amount = res.data.data[0].BALANCE;
+          setFinanceNumber(res.data.finance_number);
+          setBalance(amount);
+          setFullName(resStorage.fullName);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setLoading(false);
+          showMessage({
+            message: err.message,
+            type: 'default',
+            backgroundColor: colors.background.error,
+            color: colors.white,
+          });
+        });
+    });
+  }, []);
+  return (
+    <>
+      <SafeAreaView style={styles.container}>
+        <Profile
+          arrowBack
+          titleHeader="Account Balance"
+          navigation={navigation}
+          headerOnly
+        />
+        <View style={styles.headerWrapper}>
+          <Text style={styles.accountBalanceLabel}>{fullName}</Text>
+          {/* <View style={styles.amountWrapper}>
+          <IconRupiah />
+          <NumberFormat
+            value={balance}
+            displayType={'text'}
+            thousandSeparator={true}
+            renderText={(value) => (
+              <Text style={styles.amountLabel}>{value}</Text>
+            )}
+          />
+        </View> */}
+
+          <Text
+            style={
+              styles.dateLabel
+            }>{`Finance Number : ${financeNumber}`}</Text>
+        </View>
+        <View style={styles.saldoBoxWrapper}>
+          <SaldoBox balance={balance} />
+        </View>
+        {/* <View style={styles.detailTransactionHeaderWrapper}>
         <Text style={styles.detailTransactionLabel}>Detail Transactions</Text>
         <Button type="icon-only" icon="icon-calendar" />
-      </View>
-      <View style={styles.transactionItemWrapper}>
+      </View> */}
+        {/* <View style={styles.transactionItemWrapper}>
         <TransactionItem
           description="Registration Sem. Ganjil 2020/2021"
           date="August 10, 2020"
@@ -52,8 +96,10 @@ const AccountBalance = ({navigation}) => {
           icon="payment"
           type="credit"
         />
-      </View>
-    </SafeAreaView>
+      </View> */}
+      </SafeAreaView>
+      {loading && <Loading />}
+    </>
   );
 };
 
@@ -72,7 +118,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 10,
   },
   accountBalanceLabel: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: '400',
     color: '#FFF014',
     textAlign: 'center',
