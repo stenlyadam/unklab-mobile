@@ -13,6 +13,8 @@ const Dashboard = ({navigation}) => {
     nim: '',
     fullName: '',
     photo: '',
+    status: '',
+    academicStatus: '',
   });
   const [loading, setLoading] = useState(false);
   const [news, setNews] = useState([]);
@@ -45,6 +47,7 @@ const Dashboard = ({navigation}) => {
             nim: res.nim,
             fullName: res.fullName,
             photo: image,
+            academicStatus: res.academicStatus,
           });
           setLoading(false);
         })
@@ -71,6 +74,7 @@ const Dashboard = ({navigation}) => {
               studentName={studentProfile.fullName}
               registrationNo={studentProfile.regNumber}
               nim={studentProfile.nim}
+              academicStatus={studentProfile.academicStatus}
               titleHeader="Universitas Klabat"
               photo={studentProfile.photo}
               logout={true}

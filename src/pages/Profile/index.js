@@ -48,6 +48,7 @@ const Profile = ({navigation}) => {
             address: data.ADDRESS,
             fatherName: data.FATHER_NAME,
             motherName: data.MOTHER_NAME,
+            academicStatus: resStorage.academicStatus,
             photo: image64,
           });
           setLoading(false);
@@ -78,6 +79,7 @@ const Profile = ({navigation}) => {
     fatherName,
     motherName,
     photo,
+    academicStatus,
   } = studentProfile;
 
   return (
@@ -92,6 +94,7 @@ const Profile = ({navigation}) => {
             prodi={prodi}
             titleHeader="Student Profile"
             photo={photo}
+            academicStatus={academicStatus}
             type2
           />
           <View style={styles.informationWrapper}>

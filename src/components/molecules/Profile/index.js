@@ -16,6 +16,7 @@ const Profile = ({
   faculty,
   prodi,
   photo,
+  academicStatus,
   notification,
   search,
   arrowBack,
@@ -89,6 +90,8 @@ const Profile = ({
         <View style={styles.profile}>
           <Text style={styles.name}>{studentName}</Text>
           <Text style={styles.nim}>{`${nim} / ${registrationNo}`}</Text>
+          <Text
+            style={styles.status}>{`Academic Status : ${academicStatus}`}</Text>
         </View>
       </View>
     </View>
@@ -135,6 +138,11 @@ const styles = StyleSheet.create({
   nim: {
     fontSize: 14,
     color: colors.white,
+  },
+  status: {
+    marginTop: 5,
+    fontSize: 14,
+    color: colors.text.secondary,
   },
   badgeWrapper: {
     flex: 1,

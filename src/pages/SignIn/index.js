@@ -43,12 +43,21 @@ const SignIn = ({navigation}) => {
           })
           .then((resProfile) => {
             const studentProfile = resProfile.data.data[0];
+            let status;
+            if (studentProfile.STATUS === 'AC') {
+              status = 'Active';
+            } else if (studentProfile === 'NAC') {
+              status = 'Not Active';
+            } else {
+              status = 'Graduated';
+            }
             const userData = {
               regNumber: studentProfile.REGISTRATION_NUMBER,
               nim: studentProfile.NIM,
               fullName: studentProfile.NAMA_SESUAI_IJAZAH,
               faculty: studentProfile.FACULTY_NAME,
               prodi: studentProfile.PRODY_NAME,
+              academicStatus: status,
               token: token,
             };
             storeData('user', userData);
