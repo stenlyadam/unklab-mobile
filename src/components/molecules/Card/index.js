@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   },
   tap: {
     position: 'absolute',
-    top: 270,
+    top: '100%',
     width: 241,
     height: 30,
     backgroundColor: colors.background.tap,
