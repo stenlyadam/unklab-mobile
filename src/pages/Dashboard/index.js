@@ -66,44 +66,46 @@ const Dashboard = ({navigation}) => {
     <>
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
-          <Profile
-            studentName={studentProfile.fullName}
-            registrationNo={studentProfile.regNumber}
-            nim={studentProfile.nim}
-            titleHeader="Universitas Klabat"
-            photo={studentProfile.photo}
-            logout={true}
-            onLogout={() => navigation.replace('SignIn')}
-          />
-          <View style={styles.menuBoxContainer}>
-            <MenuBox navigation={navigation} />
-          </View>
-          <Gap height={20} />
-          <View style={styles.newsHeaderWrapper}>
-            <View style={styles.newsHeader}>
-              <Text style={styles.whatsNewsLabel}>What’s New</Text>
-              <Text style={styles.latestNewsLabel}>
-                Latest news from UNKLAB!
-              </Text>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Profile
+              studentName={studentProfile.fullName}
+              registrationNo={studentProfile.regNumber}
+              nim={studentProfile.nim}
+              titleHeader="Universitas Klabat"
+              photo={studentProfile.photo}
+              logout={true}
+              onLogout={() => navigation.replace('SignIn')}
+            />
+            <View style={styles.menuBoxContainer}>
+              <MenuBox navigation={navigation} />
             </View>
-            {/* <Button
+            <Gap height={20} />
+            <View style={styles.newsHeaderWrapper}>
+              <View style={styles.newsHeader}>
+                <Text style={styles.whatsNewsLabel}>What’s New</Text>
+                <Text style={styles.latestNewsLabel}>
+                  Latest news from UNKLAB!
+                </Text>
+              </View>
+              {/* <Button
               label="All News"
               width={100}
               height={30}
               paddingVertical={4}
             /> */}
-          </View>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {news.map((item) => (
-              <NewsCard
-                key={item.id}
-                title={item.title}
-                image={item.image}
-                content={item.content}
-                rubrik={item.rubrik}
-                navigation={navigation}
-              />
-            ))}
+            </View>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              {news.map((item) => (
+                <NewsCard
+                  key={item.id}
+                  title={item.title}
+                  image={item.image}
+                  content={item.content}
+                  rubrik={item.rubrik}
+                  navigation={navigation}
+                />
+              ))}
+            </ScrollView>
           </ScrollView>
         </View>
       </SafeAreaView>

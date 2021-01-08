@@ -1,6 +1,13 @@
 import axios from 'axios';
 import React, {useState} from 'react';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {LogoUnklab} from '../../assets';
 import {Button, Gap, Loading, TextInput} from '../../components';
@@ -79,34 +86,40 @@ const SignIn = ({navigation}) => {
     <>
       <SafeAreaView style={styles.container}>
         <View style={styles.wrapper}>
-          <Image source={LogoUnklab} style={styles.logo} />
-          <Gap height={14} />
-          <Text style={styles.welcome}>Welcome, please sign in!</Text>
-          <Text style={styles.description}>
-            Please use your registration number and password to sign in to your
-            account.
-          </Text>
-          <Gap height={35} />
-          <TextInput
-            label="Registration No"
-            placeholder="S123456789"
-            value={regNumber}
-            onChangeText={(value) => setRegNumber(value)}
-          />
-          <Gap height={31} />
-          <TextInput
-            label="Password"
-            placeholder="***********"
-            secureTextEntry
-            value={password}
-            onChangeText={(value) => setPassword(value)}
-          />
-          {/* <View style={styles.rememberMeWrapper}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Image source={LogoUnklab} style={styles.logo} />
+            <Gap height={14} />
+            <Text style={styles.welcome}>Welcome, please sign in!</Text>
+            <Text style={styles.description}>
+              Please use your registration number and password to sign in to
+              your account.
+            </Text>
+            <Gap height={35} />
+            <TextInput
+              label="Registration No"
+              placeholder="S123456789"
+              value={regNumber}
+              onChangeText={(value) => setRegNumber(value)}
+            />
+            <Gap height={31} />
+            <TextInput
+              label="Password"
+              placeholder="***********"
+              secureTextEntry
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+            />
+            {/* <View style={styles.rememberMeWrapper}>
             <CheckBox label="Remember me" />
             <Link label="Forgot Password?" />
           </View> */}
-          <Gap height={40} />
-          <Button label="Sign In Now" paddingVertical={15} onPress={onSignIn} />
+            <Gap height={40} />
+            <Button
+              label="Sign In Now"
+              paddingVertical={15}
+              onPress={onSignIn}
+            />
+          </ScrollView>
         </View>
       </SafeAreaView>
       {loading && <Loading />}
